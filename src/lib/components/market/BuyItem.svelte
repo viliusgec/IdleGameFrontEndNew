@@ -11,7 +11,7 @@
 			<thead>
 				<tr>
 					<th>Name</th>
-					<th>Ammount</th>
+					<th>Amount</th>
 					<th>Price</th>
                     <th>Buy Item</th>
 				</tr>
@@ -34,7 +34,7 @@
 								</div>
 							</div>
 						</td>
-						<td> {playerItem.ammount} </td>
+						<td> {playerItem.amount} </td>
                         <td> {playerItem.price} </td>
 						<th>
 							<button

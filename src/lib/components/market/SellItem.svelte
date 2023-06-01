@@ -14,7 +14,7 @@
 			<thead>
 				<tr>
 					<th>Name</th>
-					<th>Ammount</th>
+					<th>Amount</th>
 					<th>Sell your item</th>
 				</tr>
 			</thead>
@@ -36,7 +36,7 @@
 								</div>
 							</div>
 						</td>
-						<td> {playerItem.ammount} </td>
+						<td> {playerItem.amount} </td>
 						<th>
 							<button
 								class="btn btn-ghost btn-xs"
@@ -59,22 +59,22 @@
 					Selected Item: {selectedPlayerItem.itemName}
 				</p>
 				<p>
-					You have: {selectedPlayerItem.ammount}
+					You have: {selectedPlayerItem.amount}
 				</p>
 				<br />
 				<p>How much you want to sell?</p>
 				<br />
 				<input
-					bind:value={sellingItem.ammount}
+					bind:value={sellingItem.amount}
 					type="number"
 					class="input input-bordered w-full max-w-xs"
 				/>
 				<br />
 				<input
-					bind:value={sellingItem.ammount}
+					bind:value={sellingItem.amount}
 					type="range"
 					min="0"
-					max={selectedPlayerItem.ammount}
+					max={selectedPlayerItem.amount}
 					class="range"
 				/>
 				<br />

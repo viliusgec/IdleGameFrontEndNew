@@ -17,4 +17,5 @@ vite.config.js.timestamp-*
 .turbo
 .vercel
 .test-tmp
+.vs
 symlink-from

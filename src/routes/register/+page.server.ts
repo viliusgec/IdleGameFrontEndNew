@@ -5,9 +5,6 @@ import * as userApi from '../../stores/userStore'
 export async function load({ cookies, parent }) {
 	await parent();
 	cookies.set('jwt', '', { path: '/' });
-	if (cookies.get('jwt')) {
-		throw redirect(307, `/profile`);
-	}
 }
 
 /** @type {import('./$types').Actions} */
