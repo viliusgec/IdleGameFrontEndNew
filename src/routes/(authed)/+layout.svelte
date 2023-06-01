@@ -69,6 +69,12 @@
 					</a>
 				</li>
 			{/each}
+			<li>
+				<a href="/leaderboards">Leaderboards</a>
+			</li>
+			<li>
+				<a href="/achievements">Achievements</a>
+			</li>
 		</ul>
 	</div>
 </aside>
