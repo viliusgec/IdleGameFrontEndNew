@@ -1,10 +1,5 @@
 <script lang="ts">
 	import { leaderboardData, getLeaderboardBySkill } from '../../stores/leaderboardStore';
-	// export let skill: string;
-	// getLeaderboardBySkill(skill);
-	// export function selectItem(){
-	// 	selectedPlayerItemData.set(playerItem)
-	// }
 </script>
 
 <div class="flex flex-col w-full lg:flex-row">

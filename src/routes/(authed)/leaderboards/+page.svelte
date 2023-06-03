@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LeaderboardCard from '$lib/components/leaderboard.svelte';
+	import LeaderboardCard from '$lib/components/LeaderboardTable.svelte';
 	import { getLeaderboardBySkill } from '../../../stores/leaderboardStore';
 	
 	let activeSkill = 'Woodcutting';
@@ -8,7 +8,7 @@
 
 <div
 						role="list"
-						aria-label="Behind the scenes People "
+						aria-label="Behind the scenes People"
 						class="lg:flex px-10 pt-10 md:flex sm:flex items-center xl:justify-between flex-wrap md:justify-around sm:justify-around lg:justify-around"
 					>
 					<div class="btn-group">
