@@ -1,36 +1,14 @@
 <script lang="ts">
-	import Modal from './Modal.svelte'
 	import { Skill, trainSkill, playerSkillData } from '../../stores/skillStore';
+	import TestButton from './button/HandleButton.svelte';
 
-    export let skill;
+    export let skill: any;
 	export let token: string;
 	export let skillName: string;
 	export let skillInfo: Skill = new Skill(0, '', 0);
 	playerSkillData.subscribe((value) => {
-		skillInfo = value.find(x => x.name === skillName)
+		skillInfo = value.find(x => x.name === skillName) || new Skill(0, '', 0);
 	});
-
-
-	// import { Player, playerData } from '../../stores/playerStore';
-	// import { Skill, playerSkillData } from '../../stores/skillStore';
-
-	// export let data;
-	// let player: Player;
-	// let playerSkills: Skill[];
-
-	// playerData.subscribe((value) => {
-	// 	player = value;
-	// });
-	// playerSkillData.subscribe((value) => {
-	// 	playerSkills = value;
-	// });
-
-	// playerData.update((player) => (player = data.player as unknown as Player));
-	// playerSkillData.update(
-	// 	(playerSkills) => (playerSkills = data.playerSkills as unknown as Skill[])
-	// );
-
-
 </script>
 
 <div
@@ -63,16 +41,14 @@
 				{#if (skill.skillLevelRequired * 10) <= skillInfo.experience}
 				<form method="POST" action="/woodcutting">
 				
-					<button
+					<!-- <button
 						on:click={()=>trainSkill(skill, token)}
 						type="button"
 						class="w-full uppercase bg-gray-700 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-800 transition duration-200 each-in-out"
 						>Start action</button
-					>
+					> -->
+					<TestButton skill={skill} token={token}></TestButton>
 				</form>
-				<Modal>
-					<h1>Action started!</h1>
-				</Modal>
 				{:else}
 				<button
 				type="button"

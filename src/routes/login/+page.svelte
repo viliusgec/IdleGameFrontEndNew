@@ -1,7 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
 	import ListErrors from '$lib/ListErrors.svelte';
-
 	/** @type {import('./$types').ActionData} */
 	export let form;
 </script>
@@ -25,7 +24,6 @@
 					>
 						<p class="text-center font-semibold mx-4 mb-0">Log In </p>
 					</div>
-
 
 					<!-- Username input -->
 					<div class="mb-6">
@@ -71,6 +69,7 @@
 							Login
 						</button> -->
 						<button class="btn glass">Sign Up</button>
+						
 						<!-- <button class="btn btn-lg btn-primary inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Sign up</button> -->
 						<p class="text-sm font-semibold mt-2 pt-1 mb-0">
 							Don't have an account?

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { PlayerItem, selectedPlayerItemData, sellItem } from '../../stores/itemStore';
-	export let playerItem;
+	export let playerItem: any;
 	export let token: string;
 	export let number: number = 0;
 	export function sellItems(token: string) {

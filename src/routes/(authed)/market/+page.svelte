@@ -20,8 +20,6 @@
 	<dh-component>
 		<div class="flex w-full">
 			<div class="grid h-20 flex-grow place-items-center">
-				<h1>Market</h1>
-				<h1>Market</h1>
 				<div class="btn-group">
 					<button
 						id="sellButton"
@@ -74,13 +72,6 @@
 					</div>
 				{/if}
 			</div>
-
-			<!-- <div class="grid h-20 flex-grow place-items-center"> -->
-
-			<!-- </div> -->
 		</div>
 	</dh-component>
 </div>
-<!-- <div>
-    <SellItem playerItems={$selectedPlayerItemData} />
-</div> -->

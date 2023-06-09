@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 import { loadPlayerData } from './playerStore';
+import { toast } from '@zerodevx/svelte-toast';
 
 const skillUrl = 'https://localhost:7248/api/Skills'
 
@@ -49,6 +50,7 @@ export const trainSkill = async (trainingSkill:Skill, jwt: string) => {
         console.log("Training failed")
     }
     if (response.ok) {
+        toast.push('Training successful')
         loadPlayerSkillData(jwt);
     }
 }

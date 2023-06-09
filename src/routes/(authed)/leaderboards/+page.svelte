@@ -9,7 +9,7 @@
 <div
 						role="list"
 						aria-label="Behind the scenes People"
-						class="lg:flex px-10 pt-10 md:flex sm:flex items-center xl:justify-between flex-wrap md:justify-around sm:justify-around lg:justify-around"
+						class="lg:flex px-10 pt-4 md:flex sm:flex items-center xl:justify-between flex-wrap md:justify-around sm:justify-around lg:justify-around"
 					>
 					<div class="btn-group">
 						<button

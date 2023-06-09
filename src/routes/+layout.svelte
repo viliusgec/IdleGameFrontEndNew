@@ -11,7 +11,8 @@
 		<slot />
 	</main>
 </div>
-
+<!-- <Toast/> -->
+<!-- <SvelteToast/> -->
 <style>
 	.app {
 		display: flex;

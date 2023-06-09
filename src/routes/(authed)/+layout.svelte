@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { SvelteToast } from '@zerodevx/svelte-toast';
 	import { Player, playerData } from '../../stores/playerStore';
 	import { Skill, playerSkillData } from '../../stores/skillStore';
 
@@ -79,6 +80,7 @@
 	</div>
 </aside>
 
-<div class="p-4 sm:ml-64">
+<div class="p-4 pt-16 sm:ml-64">
+	<SvelteToast/>
 	<slot />
 </div>

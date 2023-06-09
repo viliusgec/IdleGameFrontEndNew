@@ -4,12 +4,6 @@
 	export let data;
 	loadAchievementsData(data.token);
 </script>
-
-<div>
-	<p>Achievements</p>
-	<p>Achievements</p>
-	<h1>Achievements</h1>
-</div>
 <div>
 	<AchievementsTable token={data.token} />
 </div>

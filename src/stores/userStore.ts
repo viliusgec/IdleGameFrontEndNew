@@ -30,9 +30,11 @@ export async function login(user: User){
             },
             body: JSON.stringify(user)
         });
-        if (response.status === 404) {
+        if (response.status === 400) {
+            // notifications.default('default', 1000)
+            // toast.push('Hello world!')
             console.log("bad pass")
-        }
+        }   
         if (response.ok) {
             return await response.json()
         }

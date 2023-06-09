@@ -24,7 +24,7 @@
 						<th>
 							<!-- Check if player has required xp -->
 							{#if achievement.achieved}
-								<button class="btn btn-ghost btn-xs">Claimed</button>
+								<button class="btn btn-ghost btn-xs btn-disabled">Claimed</button>
 							{:else}
 								<button
 									class="btn btn-ghost btn-xs"
