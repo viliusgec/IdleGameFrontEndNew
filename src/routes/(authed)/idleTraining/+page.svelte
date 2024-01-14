@@ -31,8 +31,6 @@
 			<div class="flex flex-col w-full lg:flex-row">
 				<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
 					<h1 class="text-3xl font-bold">Idle Training</h1>
-					<h1 class="text-3xl font-bold">Remove the bar</h1>
-					<h1 class="text-3xl font-bold">Idle Training</h1>
 					<table class="table w-full">
 						<thead>
 							<tr>

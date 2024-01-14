@@ -76,6 +76,12 @@
 			<li>
 				<a href="/achievements">Achievements</a>
 			</li>
+			<li>
+				<a href="/idleTraining">Idle trainings</a>
+			</li>
+			<li>
+				<a href="/socket">Socker/Multiplayer?</a>
+			</li>
 		</ul>
 	</div>
 </aside>

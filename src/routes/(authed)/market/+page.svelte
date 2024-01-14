@@ -10,7 +10,7 @@
 		playerMarketItemData
 	} from '../../../stores/marketStore';
 	export let data;
-	let action = 'sell';
+	let action = 'sell'; 
 	loadPlayerItemData(data.token);
 	loadMarketItemData(data.token);
 	loadPlayerMarketItemData(data.token);

@@ -62,7 +62,6 @@ export const loadPlayerItemData = async (jwt: string) => {
 }
 
 export const sellItem = async (item:PlayerItem, amount: number, jwt: string) => {
-    console.log(jwt)
     const response = await fetch(`${itemsUrl}/SellPlayerItems?sellamount=${amount}`, {
         method: 'POST',
         headers: {
@@ -75,6 +74,7 @@ export const sellItem = async (item:PlayerItem, amount: number, jwt: string) => 
         console.log("Can not sell")
     }
     if (response.ok) {
+        selectedPlayerItemData.set(new PlayerItem())
         loadPlayerItemData(jwt);
         loadPlayerData(jwt);
     }

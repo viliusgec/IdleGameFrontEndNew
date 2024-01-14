@@ -1,5 +1,4 @@
 import { writable } from 'svelte/store';
-import { loadPlayerData } from './playerStore';
 import { toast } from '@zerodevx/svelte-toast';
 
 const skillUrl = 'https://localhost:7248/api/Skills'
