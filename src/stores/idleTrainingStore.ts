@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { loadPlayerSkillData } from './skillStore';
 
 const skillsUrl = 'https://localhost:7248/api/Skills'
 
@@ -45,6 +46,7 @@ export const StartIdleTraining = async (jwt: string, id: number) => {
         });
         if (response.ok) {
             idleTrainingData.set(await response.json() as PlayerIdleTraining)
+            loadActiveIdleTrainingData(jwt);
         }
     }
     catch (error) {
@@ -63,6 +65,8 @@ export const StopIdleTraining = async (jwt: string) => {
         });
         if (response.ok) {
             idleTrainingData.set(await response.json() as PlayerIdleTraining)
+            loadActiveIdleTrainingData(jwt);
+            loadPlayerSkillData(jwt);
         }
     }
     catch (error) {

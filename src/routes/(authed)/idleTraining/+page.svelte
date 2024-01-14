@@ -13,10 +13,6 @@
 
 	export let data;
 	export let trainings: IdleTraining[];
-	export let playerActiveTraining: PlayerIdleTraining;
-	activeIdleTrainingData.subscribe((value) => {
-		playerActiveTraining = value;
-	});
 	idleTrainingListData.subscribe((value) => {
 		trainings = value;
 	});
@@ -32,27 +28,27 @@
 				<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
 					<h1 class="text-3xl font-bold">Idle Training</h1>
 					<table class="table w-full">
+						<!-- Veliau kazka normalaus sumastyt, kaip laika rodyt, cancel ir pns -->
+						{#if $activeIdleTrainingData.active}
 						<thead>
 							<tr>
-								<th>Training Name</th>
-								<th>Skill name</th>
-								<th>XP Given</th>
-								<th>Start training</th>
+								<th></th>
+								<th>Active training</th>
+								<th></th>
+								<th></th>
 							</tr>
 						</thead>
-						<!-- Veliau kazka normalaus sumastyt, kaip laika rodyt, cancel ir pns -->
-						{#if playerActiveTraining}
 							<tbody>
 								<tr>
 									<td>
 										<div class="flex items-center space-x-3">
 											<div>
-												<div class="font-bold">{playerActiveTraining.idleTraining.name}</div>
+												<div class="font-bold">{$activeIdleTrainingData.idleTraining.name}</div>
 											</div>
 										</div>
 									</td>
-									<td> {playerActiveTraining.startTime} </td>
-									<td> XP Gained: {playerActiveTraining.idleTraining.xpGiven} </td>
+									<td> {$activeIdleTrainingData.startTime} </td>
+									<td> XP Gained: {$activeIdleTrainingData.idleTraining.xpGiven} </td>
 									<th>
 										<button
 											class="btn btn-ghost btn-xs"
@@ -64,10 +60,10 @@
 						{/if}
 						<thead>
 							<tr>
-								<th></th>
-								<th>Active training</th>
-								<th></th>
-								<th></th>
+								<th>Training Name</th>
+								<th>Skill name</th>
+								<th>XP / minute</th>
+								<th>Start training</th>
 							</tr>
 						</thead>
 						<tbody>
