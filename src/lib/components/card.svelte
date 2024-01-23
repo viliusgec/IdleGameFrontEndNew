@@ -39,22 +39,14 @@
 
 			<div class="w-full flex justify-center pt-5 pb-5">
 				{#if (skill.skillLevelRequired * 10) <= skillInfo.experience}
-				<form method="POST" action="/woodcutting">
-				
-					<!-- <button
-						on:click={()=>trainSkill(skill, token)}
-						type="button"
-						class="w-full uppercase bg-gray-700 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-800 transition duration-200 each-in-out"
-						>Start action</button
-					> -->
-					<TestButton skill={skill} token={token}></TestButton>
-				</form>
+						<TestButton skill={skill} token={token}></TestButton>
 				{:else}
-				<button
-				type="button"
-				class="w-full uppercase bg-red-700 text-white px-6 py-2 rounded font-medium mx-3 transition duration-200 each-in-out"
-				>Level required: {skill.skillLevelRequired} </button
-			>
+				<div class="flex my-8 justify-center">
+					<button
+					type="button"
+					class="bg-red-700 text-white px-6 py-2 rounded font-medium mx-3 transition duration-200 each-in-out"
+					>Level required: {skill.skillLevelRequired} </button>
+				</div>
 				{/if}
 			</div>
 		</div>
