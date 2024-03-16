@@ -74,8 +74,8 @@
 											<div class="avatar">
 												<div class="mask mask-squircle w-12 h-12">
 													<img
-														src="https://iheartcraftythings.com/wp-content/uploads/2021/05/How-to-draw-tree-7.jpg"
-														alt="Avatar Tailwind CSS Component"
+														src="src\lib\images\Idle Trainings\{training.name}.svg"
+														alt="Skill training"
 													/>
 												</div>
 											</div>

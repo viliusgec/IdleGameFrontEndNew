@@ -32,6 +32,7 @@
 				<li><a href="/profile">{player.username}</a></li>
 				<li><a href="/bank">Bank</a></li>
 				<li><a href="/market">Market</a></li>
+				<li><a href="/shop">Shop</a></li>
 				<li><a href="/combat">Combat</a></li>
 				<li>
 					<form method="POST" action="/logout">

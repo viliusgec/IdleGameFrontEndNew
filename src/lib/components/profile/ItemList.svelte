@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PlayerIdleTraining } from '../../../stores/idleTrainingStore';
 	import { playerItemData, equipedItemsData, EquipItem, UnequipItem, Item } from '../../../stores/itemStore';
 
 	// export let playerItems: PlayerItem[];
@@ -27,6 +28,9 @@
 				<tr>
 					<th>Name</th>
 					<th>Equip</th>
+					<th>HP</th>
+					<th>Attack</th>
+					<th>Defense</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -48,6 +52,9 @@
 								</div>
 							</div>
 						</td>
+						<td>{playerItem.item.hp ?? 0}</td>
+						<td>{playerItem.item.attack ?? 0}</td>
+						<td>{playerItem.item.defense ?? 0}</td>
 						<th>
 							<button
 								class="btn btn-ghost btn-xs"

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Skill, trainSkill, playerSkillData } from '../../stores/skillStore';
 	import TestButton from './button/HandleButton.svelte';
-
     export let skill: any;
 	export let token: string;
 	export let skillName: string;
@@ -19,8 +18,8 @@
 		<div class="absolute -mt-20 w-full flex justify-center">
 			<div class="h-32 w-32">
 				<img
-					src="https://iheartcraftythings.com/wp-content/uploads/2021/05/How-to-draw-tree-7.jpg"
-					alt="Andres Berlin"
+					src="src\lib\images\{skillName}\{skill.trainingName}.svg"
+					alt="Skill training"
 					class="rounded-full object-cover h-full w-full shadow-md"
 				/>
 			</div>
