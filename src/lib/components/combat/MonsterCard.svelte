@@ -3,16 +3,7 @@
 		Monster,
 		startBattle
 	} from '../../../stores/battleStore';
-
-
-    // name: string;
-    // level: number;
-    // hp: number;
-    // defense: number;
-    // attack: number;
-    // droppedItem: string;
-    // itemDropChance: number;
-    // xpGiven: number;
+    
 	export let token: string;
 	export let monster: Monster;
 </script>
