@@ -27,10 +27,10 @@
 			<thead>
 				<tr>
 					<th>Name</th>
-					<th>Equip</th>
 					<th>HP</th>
 					<th>Attack</th>
 					<th>Defense</th>
+					<th>Equip</th>
 				</tr>
 			</thead>
 			<tbody>

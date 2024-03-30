@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { Skill, trainSkill, playerSkillData } from '../../stores/skillStore';
+	import { Skill, playerSkillData } from '../../stores/skillStore';
 	import TestButton from './button/HandleButton.svelte';
+	import { playerItemData } from '../../stores/itemStore'
     export let skill: any;
 	export let token: string;
 	export let skillName: string;
@@ -33,6 +34,9 @@
 			{#if skill.neededItem}
 				<p class="text-center text-gray-600 text-base pt-3 font-normal">
 					Need: {skill.neededItem}
+				</p>
+				<p class="text-center text-gray-600 text-base pt-3 font-normal">
+					You have: {$playerItemData.find(x => x.itemName === skill.neededItem)?.amount || 0}
 				</p>
 			{/if}
 

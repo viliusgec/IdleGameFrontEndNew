@@ -164,7 +164,7 @@ export const EquipItem = async (item: string, jwt: string) => {
         body: JSON.stringify(item)
     });
     if (response.status === 404 || response.status === 400) {
-        console.log("Can not equip")
+        console.log("Can not equip:" + response.json)
     }
     if (response.ok) {
         await loadEquipedItemsData(jwt)

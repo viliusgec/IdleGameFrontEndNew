@@ -19,7 +19,6 @@
 			<div class="card w-96 bg-white text-gray-800">
 				<div class="card-body">
 					{#if battle.playerHP <= 0}
-						<p class="text-gray-800 text-sm text-center">You died!</p>
 						<h2 class="card-title">You lost!</h2>
 					{:else if battle.monsterHP <= 0}
 						<h2 class="card-title">You won!</h2>
@@ -70,7 +69,7 @@
 					<div class="absolute -mt-20 w-full flex justify-center">
 						<div class="h-32 w-32">
 							<img
-								src="src\lib\images\combat\{battle.monster}.svg"
+								src="src\lib\images\combat\char.svg"
 								alt="Monster"
 								class="rounded-full object-cover h-full w-full shadow-md"
 							/>

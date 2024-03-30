@@ -1,8 +1,10 @@
 <script lang="ts">
 	import Card from '$lib/components/card.svelte';
 	import { trainingSkillData, loadTrainingSkillData } from '../../../stores/trainingSkillStore'
+	import { playerItemData, loadPlayerItemData } from '../../../stores/itemStore'
 	export let data;
     loadTrainingSkillData('Firemaking')
+    loadPlayerItemData(data.token);
 </script>
 
 <div class="mb-16">
