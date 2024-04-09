@@ -2,10 +2,18 @@
 	import Card from '$lib/components/card.svelte';
 	import { trainingSkillData, loadTrainingSkillData } from '../../../stores/trainingSkillStore'
 	import { playerItemData, loadPlayerItemData } from '../../../stores/itemStore'
+	import { Skill, playerSkillData } from '../../../stores/skillStore';
+	import SkillXPBadge from '$lib/components/skillXPBadge.svelte'
 	export let data;
     loadTrainingSkillData('Firemaking')
     loadPlayerItemData(data.token);
+	let skillInfo: Skill;
+	playerSkillData.subscribe((value) => {
+		skillInfo = value.find(x => x.name === 'Firemaking') || new Skill(0, '', 0);
+	});
 </script>
+
+<SkillXPBadge skill="Firemaking"></SkillXPBadge>
 
 <div class="mb-16">
 	<dh-component>

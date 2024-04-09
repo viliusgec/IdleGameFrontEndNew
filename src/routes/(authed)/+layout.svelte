@@ -51,7 +51,10 @@
 >
 	<div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
 		<ul class="menu bg-base-100 w-56 p-2 rounded-box">
-			{#each playerSkills as skill, i}
+			<li>
+				<a href="/bank">Money: {$playerData.money}</a>
+			</li>
+			{#each playerSkills as skill}
 				<li>
 					<a href="/{skill.name.toLowerCase()}">
 						<svg
@@ -67,7 +70,7 @@
 								d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
 							/></svg
 						>
-						{skill.name}: {skill.experience}
+						{skill.name}: {Math.floor(0.07 * Math.sqrt(skill.experience))}
 					</a>
 				</li>
 			{/each}

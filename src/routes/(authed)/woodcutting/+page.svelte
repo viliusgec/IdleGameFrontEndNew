@@ -1,9 +1,12 @@
 <script lang="ts">
 	import Card from '$lib/components/card.svelte';
+	import SkillXPBadge from '$lib/components/skillXPBadge.svelte';
 	import { trainingSkillData, loadTrainingSkillData } from '../../../stores/trainingSkillStore'
 	export let data;
     loadTrainingSkillData('Woodcutting')
 </script>
+
+<SkillXPBadge skill="Woodcutting"></SkillXPBadge>
 
 <div class="mb-16">
 	<dh-component>
