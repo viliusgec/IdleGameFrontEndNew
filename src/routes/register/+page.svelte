@@ -56,6 +56,10 @@
 							required
 						/>
 					</div>
+					<label class="label cursor-pointer">
+						<span class="label-text">I agree, than I am 18 years or older. </span> 
+						<input required type="checkbox" class="checkbox checkbox-primary" />
+					  </label>
 					<div class="text-center lg:text-left">
 						<!-- <button
 							type="button"
