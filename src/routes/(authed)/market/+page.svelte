@@ -10,7 +10,7 @@
 		playerMarketItemData
 	} from '../../../stores/marketStore';
 	export let data;
-	let action = 'sell'; 
+	let action = 'sell';
 	loadPlayerItemData(data.token);
 	loadMarketItemData(data.token);
 	loadPlayerMarketItemData(data.token);
@@ -24,7 +24,7 @@
 					<button
 						id="sellButton"
 						class="btn"
-						class:btn-active = {action === 'sell'}
+						class:btn-active={action === 'sell'}
 						on:click={() => {
 							action = 'sell';
 						}}>Sell Item</button
@@ -32,7 +32,7 @@
 					<button
 						id="buyButton"
 						class="btn"
-						class:btn-active = {action === 'buy'}
+						class:btn-active={action === 'buy'}
 						on:click={() => {
 							action = 'buy';
 						}}>Buy Item</button
@@ -40,20 +40,32 @@
 					<button
 						id="listingsButton"
 						class="btn"
-						class:btn-active = {action === 'listings'}
+						class:btn-active={action === 'listings'}
 						on:click={() => {
 							action = 'listings';
 						}}>Your Listings</button
 					>
 				</div>
 				{#if action === 'sell'}
-					<div
-						role="list"
-						aria-label="Behind the scenes People "
-						class="lg:flex px-10 pt-10 md:flex sm:flex items-center xl:justify-between flex-wrap md:justify-around sm:justify-around lg:justify-around"
-					>
-						<SellItem playerItems={$playerItemData} token={data.token} />
-					</div>
+					{#if $playerItemData.length !== 0}
+						{#if $playerMarketItemData.length >= 5}
+							<div class="flex justify-center items-center h-96">
+								<p class="text-2xl">You can create up to 5 listings</p>
+							</div>
+						{:else}
+							<div
+								role="list"
+								aria-label="Behind the scenes People "
+								class="lg:flex px-10 pt-10 md:flex sm:flex items-center xl:justify-between flex-wrap md:justify-around sm:justify-around lg:justify-around"
+							>
+								<SellItem playerItems={$playerItemData} token={data.token} />
+							</div>
+						{/if}
+					{:else}
+						<div class="flex justify-center items-center h-96">
+							<p class="text-2xl">You have no items to sell</p>
+						</div>
+					{/if}
 				{:else if action === 'buy'}
 					<div
 						role="list"
