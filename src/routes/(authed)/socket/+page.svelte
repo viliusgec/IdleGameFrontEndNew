@@ -4,6 +4,7 @@
 	let creatingGame = false;
 	let joiningGame = false;
 	let enemyName = '';
+	let healUsed = false;
 	export let myHP = 100;
 	export let enemyHP = 100;
 	export let victory = false;
@@ -22,16 +23,16 @@
 
 	connection.on('gameStarted', (username: string) => {
 		gameStarted = true;
+		healUsed = false
 	});
-	connection.on('attackReceived', (username: string, hp: number) => {
-		if (username !== data.player?.username) myHP -= hp;
+	connection.on('attackReceived', (hp: number) => {
+		myHP = hp;
 		if (myHP <= 0) {
 			defeat = true;
 		}
 	});
 
 	connection.on('attackCompleted', (hp: number) => {
-		console.log(hp);
 		enemyHP = hp;
 		if (enemyHP <= 0) {
 			victory = true;
@@ -40,7 +41,6 @@
 
 	connection.on('playerJoined', (username: string) => {
 		enemyName = username;
-		console.log('Player joined: ' + username);
 	});
 
 	connection.on('lobbyCreated', (newLobbyId: string) => {
@@ -49,6 +49,14 @@
 
 	connection.on('newLobbyCreated', (lobbies: Record<string, string>) => {
 		lobbiesList = lobbies;
+	});
+	
+	connection.on('enemyHealed', (hp: number) => {
+		enemyHP = hp;
+	});
+
+	connection.on('healingCompleted', (hp: number) => {
+		myHP = hp;
 	});
 
 	export function createLobby() {
@@ -70,11 +78,17 @@
 	}
 
 	export function startGame() {
-		connection.send('StartGameV2', data.player?.username, lobbyId);
+		connection.send('startGame', data.player?.username, lobbyId);
 	}
 
 	export function attack() {
 		connection.send('attack', data.player?.username);
+	}
+
+	export function heal() {
+		console.log(enemyName)
+		connection.send('heal', enemyName);
+		healUsed = true;
 	}
 </script>
 
@@ -100,6 +114,13 @@
 						<div class="px-6 mt-16">
 							<h1 class="font-bold text-3xl text-center mb-1">{data.player?.username}</h1>
 							<p class="text-gray-800 text-sm text-center">HP: {myHP}</p>
+							<button
+							on:click={() => heal()}
+							disabled={healUsed}
+							type="button"
+							class="w-full uppercase bg-gray-700 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-800 transition duration-200 each-in-out"
+							>Heal</button
+						>
 						</div>
 					</div>
 				</div>
