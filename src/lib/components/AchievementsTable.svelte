@@ -9,8 +9,8 @@
 		<table class="table w-full">
 			<thead>
 				<tr>
-					<th>Skill Type</th>
-					<th>Required XP</th>
+					<th>Training Name</th>
+					<th>Progress</th>
 					<th>Reward</th>
 					<th />
 				</tr>
@@ -18,13 +18,14 @@
 			<tbody>
 				{#each $achievementsData as achievement}
 					<tr>
-						<td> {achievement.skillType} </td>
-						<td> {achievement.requiredXP} </td>
+						<td> {achievement.trainingName} </td>
+						<td> {achievement.count} / {achievement.requiredCount} </td>
 						<td> {achievement.reward} </td>
 						<th>
-							<!-- Check if player has required xp -->
 							{#if achievement.achieved}
 								<button class="btn btn-ghost btn-xs btn-disabled">Claimed</button>
+							{:else if achievement.count < achievement.requiredCount}
+								<button class="btn btn-ghost btn-xs btn-disabled">Claim</button>
 							{:else}
 								<button
 									class="btn btn-ghost btn-xs"

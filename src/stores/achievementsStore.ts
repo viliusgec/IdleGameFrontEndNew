@@ -5,18 +5,20 @@ const skillsUrl = 'https://localhost:7248/api/Skills'
 
 export class PlayerAchievement {
     id: number;
-    skillType: string;
-    requiredXP: number;
+    trainingName: string;
+    requiredCount: number;
     reward: number;
     achieved: boolean;
     description: string;
-    constructor(id: number, skillType: string, requiredXP: number, reward: number, achieved: boolean, description: string) {
+    count: number;
+    constructor(id: number, skillType: string, requiredCount: number, reward: number, achieved: boolean, description: string, count: number) {
         this.id = id;
-        this.skillType = skillType;
-        this.requiredXP = requiredXP;
+        this.trainingName = skillType;
+        this.requiredCount = requiredCount;
         this.reward = reward;
         this.achieved = achieved;
         this.description = description;
+        this.count = count;
     }
 }
 
