@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-const battleUrl = 'https://localhost:7248/api/Battles'
+const battleUrl = 'https://idlegameapihost20240414223504.azurewebsites.net//api/Battles'
 
 export class Monster {
     name: string;

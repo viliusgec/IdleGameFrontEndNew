@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { loadPlayerSkillData } from './skillStore';
 
-const skillsUrl = 'https://localhost:7248/api/Skills'
+const skillsUrl = 'https://idlegameapihost20240414223504.azurewebsites.net//api/Skills'
 
 export class PlayerAchievement {
     id: number;

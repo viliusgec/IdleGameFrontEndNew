@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-const skillUrl = 'https://localhost:7248/api/Skills'
+const skillUrl = 'https://idlegameapihost20240414223504.azurewebsites.net//api/Skills'
 
 export class TrainingSkill {
     trainingName: string;

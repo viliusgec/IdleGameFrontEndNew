@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-const userUrl = 'https://localhost:7248/api/Users'
+const userUrl = 'https://idlegameapihost20240414223504.azurewebsites.net//api/Users'
 
 export class User {
     username:string;
