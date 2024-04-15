@@ -7,7 +7,7 @@
 	let amount = 0;
 	let filter = ''
 	let page = 1
-	let pageSize = 3
+	let pageSize = 5
 
 	export function cancel() {
 		$selectedPlayerItemData = {} as PlayerItem;
@@ -73,8 +73,9 @@
 		</table>
 	</div>
 	<div class="divider lg:divider-horizontal" />
+	{#if $selectedPlayerItemData.itemName}
 	<div class="grid flex-grow card bg-base-300 rounded-box place-items-center">
-		{#if $selectedPlayerItemData.itemName}
+		
 			<div class="text-center text-gray-600 text-base pt-3 font-normal">
 				<p>
 					Selected Item: {$selectedPlayerItemData.itemName}
@@ -97,8 +98,8 @@
 				>
 				<button on:click={() => cancel()} class="btn">Cancel</button>
 			</div>
-		{:else}
-			<p class="text-center text-gray-600 text-base pt-3 font-normal">Select an item to sell</p>
-		{/if}
+		<!-- {:else}
+			<p class="text-center text-gray-600 text-base pt-3 font-normal">Select an item to sell</p> -->
 	</div>
+	{/if}
 </div>

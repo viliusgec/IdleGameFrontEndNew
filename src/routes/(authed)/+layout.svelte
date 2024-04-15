@@ -11,7 +11,7 @@
 		player = value;
 	});
 	playerSkillData.subscribe((value) => {
-		playerSkills = value;
+		playerSkills = value.sort((a, b) => (a.name < b.name ? -1 : 1));
 	});
 
 	playerData.update((player) => (player = data.player as unknown as Player));
