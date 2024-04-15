@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { loadPlayerData } from './playerStore'
 
-const itemsUrl = 'https://idlegameapihost20240414223504.azurewebsites.net//api/Items'
+const itemsUrl = 'https://localhost:7248/api/Items'
 
 export class Item {
     name: string;

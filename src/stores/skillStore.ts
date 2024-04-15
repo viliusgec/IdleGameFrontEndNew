@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 import { toast } from '@zerodevx/svelte-toast';
 import { loadPlayerItemData } from './itemStore';
 
-const skillUrl = 'https://idlegameapihost20240414223504.azurewebsites.net//api/Skills'
+const skillUrl = 'https://localhost:7248/api/Skills'
 
 export class Skill {
     id: number;

@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-const leaderboarUrl = 'https://idlegameapihost20240414223504.azurewebsites.net//api/Skills/GetLeadersBySkill'
+const leaderboarUrl = 'https://localhost:7248/api/Skills/GetLeadersBySkill'
 
 export class Leaderboard {
     name: string; // Skill name
