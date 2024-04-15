@@ -9,7 +9,7 @@ playerSkillData.subscribe((value) => {
 
 <div class="stats shadow">
 	<div class="stat">
-	  <div class="stat-title">Experience</div>
+	  <div class="stat-title">{skillInfo.name} Experience</div>
 	  <div class="stat-value">{skillInfo.experience} / {Math.round(((Math.floor(0.07 * Math.sqrt(skillInfo.experience))+1)/0.07)**2)}</div>
 	  <progress class="progress progress-info w-56" value="{skillInfo.experience}" max={Math.round(((Math.floor(0.07 * Math.sqrt(skillInfo.experience))+1)/0.07)**2)}></progress>
 	</div>

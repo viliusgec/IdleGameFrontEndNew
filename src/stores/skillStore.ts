@@ -16,6 +16,7 @@ export class Skill {
 }
 
 export let playerSkillData = writable<Skill[]>([])
+export let activeSkill = writable<Skill>(new Skill(0, '', 0))
 
 export const loadPlayerSkillData = async (jwt: string) => {
     try{
@@ -29,6 +30,7 @@ export const loadPlayerSkillData = async (jwt: string) => {
         if (response.ok) {
             let data = await response.json() as Skill[]
             playerSkillData.set(data)
+            activeSkill.set(new Skill(0, '', 0))
             return data
         }
     }
