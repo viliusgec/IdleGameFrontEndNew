@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { Skill, playerSkillData } from '../../stores/skillStore';
 	import TestButton from './button/HandleButton.svelte';
-	import { playerItemData } from '../../stores/itemStore'
-    export let skill: any;
+	import { playerItemData } from '../../stores/itemStore';
+	export let skill: any;
 	export let token: string;
 	export let skillName: string;
 	export let skillInfo: Skill = new Skill(0, '', 0);
 	playerSkillData.subscribe((value) => {
-		skillInfo = value.find(x => x.name === skillName) || new Skill(0, '', 0);
+		skillInfo = value.find((x) => x.name === skillName) || new Skill(0, '', 0);
 	});
 </script>
 
@@ -33,23 +33,33 @@
 			</p>
 			{#if skill.neededItem}
 				<p class="text-center text-gray-600 text-base pt-3 font-normal">
-					Need: {skill.neededItem}
+					Need: {skill.neededItemAmount}
+					{skill.neededItem}
 				</p>
 				<p class="text-center text-gray-600 text-base pt-3 font-normal">
-					You have: {$playerItemData.find(x => x.itemName === skill.neededItem)?.amount || 0}
+					You have: {$playerItemData.find((x) => x.itemName === skill.neededItem)?.amount || 0}
 				</p>
 			{/if}
 
 			<div class="w-full flex justify-center pt-5 pb-5">
-				{#if (skill.skillLevelRequired * 10) <= skillInfo.experience}
-						<TestButton skill={skill} token={token}></TestButton>
+				{#if Math.floor(0.07 * Math.sqrt(skillInfo.experience)) < skill.skillLevelRequired}
+					<div class="flex my-8 justify-center">
+						<button
+							type="button"
+							class="bg-red-700 text-white px-6 py-2 rounded font-medium mx-3 transition duration-200 each-in-out"
+							>Level required: {skill.skillLevelRequired}
+						</button>
+					</div>
+				{:else if ($playerItemData.find((x) => x.itemName === skill.neededItem)?.amount || 0) < skill.neededItemAmount}
+					<div class="flex my-8 justify-center">
+						<button
+							type="button"
+							class="bg-red-700 text-white px-6 py-2 rounded font-medium mx-3 transition duration-200 each-in-out"
+							>Item missing</button
+						>
+					</div>
 				{:else}
-				<div class="flex my-8 justify-center">
-					<button
-					type="button"
-					class="bg-red-700 text-white px-6 py-2 rounded font-medium mx-3 transition duration-200 each-in-out"
-					>Level required: {skill.skillLevelRequired} </button>
-				</div>
+					<TestButton {skill} {token} />
 				{/if}
 			</div>
 		</div>

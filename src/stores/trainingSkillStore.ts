@@ -31,11 +31,10 @@ export const loadTrainingSkillData = async (skill: string) => {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json'
-                    // 'Authorization': 'Bearer ' + localStorage.getItem('token')
                 },
             });
             if (response.ok) {
-                trainingSkillData.set(await response.json() as TrainingSkill[])
+                trainingSkillData.set((await response.json() as TrainingSkill[]).sort((a, b) => a.skillLevelRequired - b.skillLevelRequired))
             }
             else {
                 console.log(response)
