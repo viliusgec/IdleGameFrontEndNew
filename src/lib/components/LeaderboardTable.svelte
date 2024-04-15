@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { leaderboardData, getLeaderboardBySkill } from '../../stores/leaderboardStore';
+	import { leaderboardData } from '../../stores/leaderboardStore';
 </script>
 
 <div class="flex flex-col w-full lg:flex-row">
