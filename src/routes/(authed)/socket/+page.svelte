@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as signalR from '@microsoft/signalr';
-	import { loadPlayerData } from '../../../stores/playerStore';
+	import { loadPlayerData, playerData } from '../../../stores/playerStore';
+	import { head_selector } from 'svelte/internal';
 
 	let gameStarted = false;
 	let creatingGame = false;
@@ -101,10 +102,12 @@
 	export function joinExistingLobby(lobbyID: string, playerName: string) {
 		// Send message that invintation has been send
 		enemyName = playerName;
+		moneyBet = lobbiesWithMoneyList[playerName].money;
 		connection.send('joinLobby', data.player?.username, lobbyID);
 	}
 
 	export function startGame() {
+		waitingForOpponent = false;
 		connection.send('startGame', data.player?.username, lobbyId);
 	}
 
@@ -116,6 +119,17 @@
 		console.log(enemyName);
 		connection.send('heal', enemyName);
 		healUsed = true;
+	}
+
+	export function resetBattle() {
+		victory = false;
+		defeat = false;
+		myHP = 100;
+		enemyHP = 100;
+		healUsed = false;
+		gameStarted = false;
+		moneyBet = 0;
+
 	}
 </script>
 
@@ -179,14 +193,13 @@
 	{:else if creatingGame}
 		<div class="px-6 mt-16">
 			<p class="text-black text-center">Enter amount you want to bet and create the lobby</p>
-			<!-- {#if enemyName === ''} -->
 				<section>
 					<h2>Bet your money:</h2>
 					<div>
-						<input type="number" bind:value={moneyBet} min="0" max={data.player?.money} />
+						<input type="number" bind:value={moneyBet} min="0" max={$playerData.money} />
 					</div>
 					<div>
-						<input type="range" bind:value={moneyBet} min="0" max={data.player?.money} />
+						<input type="range" bind:value={moneyBet} min="0" max={$playerData.money} />
 					</div>
 				</section>
 
@@ -203,15 +216,6 @@
 					class="uppercase bg-gray-700 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-800 transition duration-200 each-in-out"
 					>Join existing lobby</button
 				>
-			<!-- {:else}
-				<p class="text-black text-center">{enemyName} joined your lobby. Start game</p>
-				<button
-					on:click={() => startGame()}
-					type="button"
-					class="uppercase bg-gray-700 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-800 transition duration-200 each-in-out"
-					>Start</button
-				>
-			{/if} -->
 		</div>
 	{:else if joiningGame && lobbiesList !== undefined && lobbiesWithMoneyList !== undefined}
 		<div class="flex flex-col w-full lg:flex-row">
@@ -227,10 +231,10 @@
 					</thead>
 					<tbody>
 						{#each Object.entries(lobbiesWithMoneyList) as [key, value]}
-							{#if key !== data.player?.username}
+							{#if key !== data.player?.username && value.money <= ($playerData.money ?? 0 )}
 								<tr>
 									<td> {key} </td>
-									<td> {value.money} </td>
+									<td> {value.money} {$playerData.money} </td>
 									<th>
 										<button
 											class="btn btn-ghost btn-xs"
@@ -287,11 +291,23 @@
 		</div>
 	{/if}
 {:else if victory}
-	<div class="px-6 mt-16">
-		<p class="text-yellow-100 text-sm text-center">You won!</p>
+<div class="card w-96 bg-white text-gray-800">
+	<div class="card-body">
+		<h2 class="card-title">You won!</h2>
+		<p>You received: {moneyBet} money</p>
+		<button on:click={() => resetBattle()} type="button" class="btn text-white"
+			>Fight new enemy</button
+		>
 	</div>
+</div>
 {:else if defeat}
-	<div class="px-6 mt-16">
-		<p class="text-yellow-100 text-sm text-center">You lost!</p>
+<div class="card w-96 bg-white text-gray-800">
+	<div class="card-body">
+		<h2 class="card-title">You lost!</h2>
+		<p>You lost: {moneyBet} money</p>
+		<button on:click={() => resetBattle()} type="button" class="btn text-white"
+			>Fight new enemy</button
+		>
 	</div>
+</div>
 {/if}
