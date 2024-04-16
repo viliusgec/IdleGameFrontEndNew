@@ -25,7 +25,7 @@
 >
 	<div class="navbar bg-base-100">
 		<div class="flex-1">
-			<a href="/" class="btn btn-ghost normal-case text-xl">Trash game</a>
+			<a href="/" class="btn btn-ghost normal-case text-xl">Idle game</a>
 		</div>
 		<div class="flex-none">
 			<ul class="menu menu-horizontal px-1">
@@ -33,7 +33,7 @@
 				<li><a href="/bank">Bank</a></li>
 				<li><a href="/market">Market</a></li>
 				<li><a href="/shop">Shop</a></li>
-				<li><a href="/combat">Combat</a></li>
+				
 				<li>
 					<form method="POST" action="/logout">
 						<button>log out</button>
@@ -75,17 +75,22 @@
 				</li>
 			{/each}
 			<li>
+				<a href="/idleTraining">Idle trainings</a>
+			</li>
+			<li>
+				<a href="/combat">Combat</a>
+			</li>
+			<li>
+				<a href="/socket">PvP</a>
+			</li>
+			<li>
 				<a href="/leaderboards">Leaderboards</a>
 			</li>
 			<li>
 				<a href="/achievements">Achievements</a>
 			</li>
-			<li>
-				<a href="/idleTraining">Idle trainings</a>
-			</li>
-			<li>
-				<a href="/socket">Socker/Multiplayer?</a>
-			</li>
+
+
 		</ul>
 	</div>
 </aside>

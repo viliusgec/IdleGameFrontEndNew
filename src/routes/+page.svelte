@@ -2,17 +2,16 @@
 	/**
 	 * @type {{ rtext: any; }}
 	 */
-	 export let data
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Idle Game</title>
+	<meta name="description" content="Svelte app" />
 </svelte:head>
 
 <section>
 	<h2>
-		Trash app test cookies <strong>"{data.rtext}"</strong>
+		Idle Game
 	</h2>
 
 </section>
