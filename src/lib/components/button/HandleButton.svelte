@@ -34,7 +34,7 @@
 	}
 </script>
 
-<div class="flex my-8 justify-center">
+<div>
 	<Button
 		on:click={handleButton}
 		loading={isLoading}

@@ -12,9 +12,8 @@
 
 	let iconClass = 'button-icon absolute right-2 top-2/4	transform -translate-y-2/4 ';
 </script>
-
 <button
-	class="transition-all overflow-hidden transform relative text-white px-4 py-3 rounded-lg shadow-lg {loading
+	class="transition-all overflow-hidden transform relative text-white px-6 py-2 rounded-lg shadow-lg {loading
 		? loadingClass
 		: ''} {error ? errorClass : ''} {done ? doneClass : ''} {loading || error || done
 		? 'pr-8 pl-4'
@@ -22,6 +21,7 @@
   "
 	on:click|preventDefault
 >
+
 	<slot />
 
 	{#if loading}

@@ -6,6 +6,7 @@
 	export let token: string;
 	export let skillName: string;
 	export let skillInfo: Skill = new Skill(0, '', 0);
+	let requiredItemAmount = $playerItemData.find((x) => x.itemName === skill.neededItem)?.amount || 0;
 	playerSkillData.subscribe((value) => {
 		skillInfo = value.find((x) => x.name === skillName) || new Skill(0, '', 0);
 	});
@@ -27,40 +28,43 @@
 		</div>
 		<div class="px-6 mt-16">
 			<h1 class="font-bold text-3xl text-center mb-1">{skill.trainingName}</h1>
-			<p class="text-gray-800 text-sm text-center">Gives {skill.xpGiven} XP</p>
-			<p class="text-center text-gray-600 text-base pt-3 font-normal">
-				Drops {skill.givenItem}
-			</p>
+			<div class="stat place-items-center">
+				<div class="stat-value text-primary">{skill.xpGiven} XP</div>
+				<div class="stat-desc text-primary">Reward</div>
+			</div>
+
 			{#if skill.neededItem}
-				<p class="text-center text-gray-600 text-base pt-3 font-normal">
-					Need: {skill.neededItemAmount}
-					{skill.neededItem}
-				</p>
-				<p class="text-center text-gray-600 text-base pt-3 font-normal">
-					You have: {$playerItemData.find((x) => x.itemName === skill.neededItem)?.amount || 0}
-				</p>
+					<div class="stat place-items-center">
+						{#if requiredItemAmount < skill.neededItemAmount}
+							<div class="stat-value text-red-600">{requiredItemAmount}/{skill.neededItemAmount}</div>
+							<div class="stat-title text-red-600">{skill.neededItem} required</div>
+						{:else}
+							<div class="stat-value text-green-600">{requiredItemAmount}/{skill.neededItemAmount}</div>
+							<div class="stat-title text-green-600">{skill.neededItem} required</div>
+						{/if}
+						
+					  </div>
 			{/if}
 
-			<div class="w-full flex justify-center pt-5 pb-5">
+			<div class="w-full flex justify-center my-8">
+				<div class="flex justify-center">
 				{#if Math.floor(0.07 * Math.sqrt(skillInfo.experience)) < skill.skillLevelRequired}
-					<div class="flex my-8 justify-center">
+					
 						<button
 							type="button"
 							class="bg-red-700 text-white px-6 py-2 rounded font-medium mx-3 transition duration-200 each-in-out"
 							>Level required: {skill.skillLevelRequired}
 						</button>
-					</div>
-				{:else if ($playerItemData.find((x) => x.itemName === skill.neededItem)?.amount || 0) < skill.neededItemAmount}
-					<div class="flex my-8 justify-center">
+				{:else if requiredItemAmount < skill.neededItemAmount}
 						<button
 							type="button"
 							class="bg-red-700 text-white px-6 py-2 rounded font-medium mx-3 transition duration-200 each-in-out"
 							>Item missing</button
 						>
-					</div>
 				{:else}
 					<TestButton {skill} {token} />
 				{/if}
+				</div>
 			</div>
 		</div>
 	</div>

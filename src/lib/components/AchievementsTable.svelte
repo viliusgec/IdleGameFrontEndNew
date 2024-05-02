@@ -4,9 +4,8 @@
 	export let token: string;
 </script>
 
-<div class="flex flex-col w-full lg:flex-row">
-	<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
-		<table class="table w-full">
+<div class="flex flex-col w-full lg:flex-row justify-center">
+		<table class="table w-3/4">
 			<thead>
 				<tr>
 					<th>Description</th>
@@ -37,5 +36,4 @@
 				{/each}
 			</tbody>
 		</table>
-	</div>
 </div>

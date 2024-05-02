@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 import { toast } from '@zerodevx/svelte-toast';
 import { loadPlayerItemData } from './itemStore';
+import type { TrainingSkill } from './trainingSkillStore';
 
 const skillUrl = 'https://localhost:7248/api/Skills'
 
@@ -39,7 +40,7 @@ export const loadPlayerSkillData = async (jwt: string) => {
     }
 }
 
-export const trainSkill = async (trainingSkill:Skill, jwt: string) => {
+export const trainSkill = async (trainingSkill:TrainingSkill, jwt: string) => {
     const response = await fetch(`${skillUrl}/TrainSkill`, {
         method: 'POST',
         headers: {
@@ -53,6 +54,7 @@ export const trainSkill = async (trainingSkill:Skill, jwt: string) => {
     }
     if (response.ok) {
         toast.push('Training successful')
+        toast.push('+' + trainingSkill.givenItemAmount + ' ' + trainingSkill.givenItem) 
         loadPlayerSkillData(jwt);
         loadPlayerItemData(jwt);
     }
