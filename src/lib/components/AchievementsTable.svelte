@@ -9,7 +9,7 @@
 		<table class="table w-full">
 			<thead>
 				<tr>
-					<th>Training Name</th>
+					<th>Description</th>
 					<th>Progress</th>
 					<th>Reward</th>
 					<th />
@@ -18,7 +18,7 @@
 			<tbody>
 				{#each $achievementsData as achievement}
 					<tr>
-						<td> {achievement.trainingName} </td>
+						<td> {achievement.description} </td>
 						<td> {achievement.count} / {achievement.requiredCount} </td>
 						<td> {achievement.reward} </td>
 						<th>
