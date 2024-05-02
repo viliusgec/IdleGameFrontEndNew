@@ -20,7 +20,7 @@
 	<dh-component>
 		<div class="flex w-full">
 			<div class="grid h-20 flex-grow place-items-center">
-				<div class="btn-group">
+				<div class="btn-group mb-4">
 					<button
 						id="sellButton"
 						class="btn"
@@ -56,7 +56,7 @@
 							<div
 								role="list"
 								aria-label="Behind the scenes People "
-								class="lg:flex px-10 pt-10 md:flex sm:flex items-center xl:justify-between flex-wrap md:justify-around sm:justify-around lg:justify-around"
+								class="lg:flex px-10 md:flex sm:flex items-center xl:justify-between flex-wrap md:justify-around sm:justify-around lg:justify-around"
 							>
 								<SellItem playerItems={$playerItemData} token={data.token} />
 							</div>
@@ -70,7 +70,7 @@
 					<div
 						role="list"
 						aria-label="Behind the scenes People "
-						class="lg:flex px-10 pt-10 md:flex sm:flex items-center xl:justify-between flex-wrap md:justify-around sm:justify-around lg:justify-around"
+						class="lg:flex px-10 md:flex sm:flex items-center xl:justify-between flex-wrap md:justify-around sm:justify-around lg:justify-around"
 					>
 						<BuyItem marketItems={$marketItemData} token={data.token} />
 					</div>
@@ -78,7 +78,7 @@
 					<div
 						role="list"
 						aria-label="Behind the scenes People "
-						class="lg:flex px-10 pt-10 md:flex sm:flex items-center xl:justify-between flex-wrap md:justify-around sm:justify-around lg:justify-around"
+						class="lg:flex px-10 md:flex sm:flex items-center xl:justify-between flex-wrap md:justify-around sm:justify-around lg:justify-around"
 					>
 						<SellingItems playerItems={$playerMarketItemData} token={data.token} />
 					</div>

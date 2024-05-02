@@ -253,7 +253,7 @@
 		<p class="text-black text-center">Your lobby ID: {lobbyId}. </p>
 		<p>Money bet: {moneyBet}</p>
 		{#if enemyName === ''}
-			<p class="text-black text-center">Waiting for opponent.</p>
+			<p class="text-black text-center">Waiting for opponent...</p>
 			<button
 				on:click={() => joinLobby()}
 				type="button"

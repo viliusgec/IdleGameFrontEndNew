@@ -64,7 +64,7 @@
 										</div>
 									</div>
 									<div>
-										<div class="font-bold">{playerItem.description}</div>
+										<div class="font-bold capitalize">{playerItem.description}</div>
 									</div>
 								</div>
 							</td>
