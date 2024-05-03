@@ -101,9 +101,9 @@
 	<div class="divider lg:divider-horizontal" />
 	{#if $selectedPlayerItemData.itemName}
 		<div class="grid flex-grow card bg-base-300 rounded-box place-items-center">
-			<div class="text-center text-gray-600 text-base pt-3 font-normal">
+			<div class="text-center text-white-600 text-base pt-3 font-normal">
 				<p>
-					Selected Item: {$selectedPlayerItemData.itemName}
+					<b>Selected Item: {$selectedPlayerItemData.item.description}</b>
 				</p>
 				<p>
 					You have: {$selectedPlayerItemData.amount}

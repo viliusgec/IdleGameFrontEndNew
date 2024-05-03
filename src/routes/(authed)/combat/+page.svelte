@@ -29,7 +29,7 @@
 <div class="mb-16">
 	<dh-component>
 		{#if battle.id != 0}
-			<h1 class="font-bold text-3xl text-center mb-1">Battle</h1>
+			<h1 class="font-bold text-3xl text-primary text-center mb-1">Battle</h1>
 			<MonsterCombatCard token={data.token} />
 		{:else}
 			<h1 class="font-bold text-3xl text-center mb-1 text-primary">Select a monster</h1>

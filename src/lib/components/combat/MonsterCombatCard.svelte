@@ -50,9 +50,8 @@
 						</div>
 					</div>
 					<div class="px-6 mt-16">
-						<h1 class="font-bold text-3xl text-center mb-1">{battle.monster}</h1>
+						<h1 class="font-bold text-primary text-3xl text-center mb-1">{battle.monster}</h1>
 						<p class="text-gray-800 text-sm text-center">HP: {battle.monsterHP}</p>
-						<p class="text-center text-gray-600 text-base pt-3 font-normal">Defense: 10</p>
 						<form method="POST" action="/combat">
 							<button
 								on:click={() => attack(battle, token)}
@@ -76,7 +75,7 @@
 						</div>
 					</div>
 					<div class="px-6 mt-16">
-						<h1 class="font-bold text-3xl text-center mb-1">{battle.player}</h1>
+						<h1 class="font-bold text-3xl text-primary text-center mb-1">{battle.player}</h1>
 						<p class="text-gray-800 text-sm text-center">HP: {battle.playerHP}</p>
 					</div>
 				</div>

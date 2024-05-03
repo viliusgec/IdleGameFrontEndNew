@@ -36,7 +36,7 @@
 				
 				<li>
 					<form method="POST" action="/logout">
-						<button>log out</button>
+						<button>Log Out</button>
 					</form>
 				</li>
 			</ul>

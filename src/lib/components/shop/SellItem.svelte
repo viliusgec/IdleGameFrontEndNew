@@ -2,17 +2,43 @@
 	import { shopItems, loadShopItemsData, Item, buyShopItem } from '../../../stores/itemStore';
 
 	export let token: string;
-	let selectedItem = {} as Item
+	let selectedItem = {} as Item;
+	let filteredMarketItems = $shopItems;
 	let amount = 0;
+	let filter = '';
+	let page = 1;
+	let pageSize = 5;
 	loadShopItemsData(token);
 	export function cancel() {
 		selectedItem = {} as Item;
-		amount = 0
+		amount = 0;
 	}
 </script>
 
 <div class="flex flex-col w-full lg:flex-row">
 	<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
+		<label class="input input-bordered flex items-center gap-2">
+			<input
+				type="text"
+				class="grow"
+				placeholder="Filter"
+				bind:value={filter}
+				on:input={() => {
+					filteredMarketItems = $shopItems.filter((x) => x.description.includes(filter));
+				}}
+			/>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 16 16"
+				fill="currentColor"
+				class="w-4 h-4 opacity-70"
+				><path
+					fill-rule="evenodd"
+					d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+					clip-rule="evenodd"
+				/></svg
+			>
+		</label>
 		<table class="table w-full">
 			<thead>
 				<tr>
@@ -28,14 +54,11 @@
 							<div class="flex items-center space-x-3">
 								<div class="avatar">
 									<div class="mask mask-squircle w-12 h-12">
-										<img
-											src="https://iheartcraftythings.com/wp-content/uploads/2021/05/How-to-draw-tree-7.jpg"
-											alt="Avatar Tailwind CSS Component"
-										/>
+										<img src="src\lib\images\Items\{item.name}.svg" alt="Skill training" />
 									</div>
 								</div>
 								<div>
-									<div class="font-bold">{item.name}</div>
+									<div class="font-bold">{item.description}</div>
 								</div>
 							</div>
 						</td>
@@ -50,33 +73,37 @@
 						</th>
 					</tr>
 				{/each}
+				<!-- PAgination -->
+				<div class="join grid grid-cols-2">
+					{#if page > 1}
+						<button on:click={() => page--} class="join-item btn btn-outline">Previous page</button>
+					{/if}
+					{#if filteredMarketItems.length > pageSize * page}
+						<button on:click={() => page++} class="join-item btn btn-outline">Next page</button>
+					{/if}
+				</div>
 			</tbody>
 		</table>
 	</div>
 	<div class="divider lg:divider-horizontal" />
-	<div class="grid flex-grow card bg-base-300 rounded-box place-items-center">
-		{#if selectedItem.name}
-			<div class="text-center text-gray-600 text-base pt-3 font-normal">
+	{#if selectedItem.name}
+		<div class="grid flex-grow card bg-base-300 rounded-box place-items-center">
+			<div class="text-center text-white-600 text-base pt-3 font-normal">
 				<p>
-					Selected Item: {selectedItem.name}
+					<b>Selected Item: {selectedItem.name}</b>
 				</p>
 				<br />
 				<p>How much you want to buy?</p>
 				<br />
-				<input
-					bind:value={amount}
-					type="number"
-					class="input input-bordered w-full max-w-xs"
-				/>
+				<input bind:value={amount} type="number" class="input input-bordered w-full max-w-xs" />
 				<br />
 				<br />
-				<button on:click={() => buyShopItem(selectedItem, amount, token).then(() => cancel())} class="btn"
-					>Buy Item</button
+				<button
+					on:click={() => buyShopItem(selectedItem, amount, token).then(() => cancel())}
+					class="btn">Buy Item</button
 				>
 				<button on:click={() => cancel()} class="btn">Cancel</button>
 			</div>
-		{:else}
-			<p class="text-center text-gray-600 text-base pt-3 font-normal">Select an item to buy</p>
-		{/if}
-	</div>
+		</div>
+	{/if}
 </div>
