@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { PlayerItem, selectedPlayerItemData, sellItem } from '../../../stores/itemStore';
+	import { PlayerItem, selectedPlayerItemData, sellItem, playerItemData, loadPlayerItemData } from '../../../stores/itemStore';
 
 	export let playerItems: PlayerItem[];
-	let filteredPlayerItems = playerItems;
+	let filteredPlayerItems = $playerItemData;
 	export let token: string;
 	let amount = 0;
 	let filter = '';
@@ -13,6 +13,11 @@
 		$selectedPlayerItemData = {} as PlayerItem;
 		amount = 0;
 	}
+	loadPlayerItemData(token);
+	playerItemData.subscribe((value) => {
+		playerItems = value;
+		filteredPlayerItems = value;
+	});
 </script>
 
 <div class="flex flex-col w-full lg:flex-row">

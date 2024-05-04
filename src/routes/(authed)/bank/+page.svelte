@@ -2,7 +2,6 @@
     import { playerItemData, loadPlayerItemData } from '../../../stores/itemStore'
     import SellItem from '$lib/components/bank/SellItem.svelte'
 	export let data;
-    loadPlayerItemData(data.token);
 </script>
 
 <div

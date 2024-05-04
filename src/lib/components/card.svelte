@@ -1,15 +1,18 @@
 <script lang="ts">
 	import { Skill, playerSkillData } from '../../stores/skillStore';
 	import Button from './button/HandleButton.svelte';
-	import { playerItemData } from '../../stores/itemStore';
+	import { playerItemData, loadPlayerItemData } from '../../stores/itemStore';
 	export let skill: any;
 	export let token: string;
 	export let skillName: string;
 	export let skillInfo: Skill = new Skill(0, '', 0);
-	let requiredItemAmount =
-		$playerItemData.find((x) => x.itemName === skill.neededItem)?.amount || 0;
+	let items = $playerItemData;
+
 	playerSkillData.subscribe((value) => {
 		skillInfo = value.find((x) => x.name === skillName) || new Skill(0, '', 0);
+	});
+	playerItemData.subscribe((value) => {
+		items = value;
 	});
 </script>
 
@@ -39,14 +42,14 @@
 			{#if skill.neededItem}
 				<div class="stat place-items-center">
 					<div
-						class="stat-value text-3xl {requiredItemAmount < skill.neededItemAmount
+						class="stat-value text-3xl {(items.find((x) => x.itemName === skill.neededItem)?.amount || 0) < skill.neededItemAmount
 							? 'text-red-600'
 							: 'text-green-600'}"
 					>
-						{requiredItemAmount}/{skill.neededItemAmount}
+						{items.find((x) => x.itemName === skill.neededItem)?.amount || 0}/{skill.neededItemAmount}
 					</div>
 					<div
-						class="stat-title  capitalize {requiredItemAmount < skill.neededItemAmount
+						class="stat-title capitalize {(items.find((x) => x.itemName === skill.neededItem)?.amount || 0) < skill.neededItemAmount
 							? 'text-red-600'
 							: 'text-green-600'}"
 					>
@@ -57,13 +60,13 @@
 
 			<div class="w-full flex justify-center my-8">
 				<div class="flex justify-center">
-					{#if Math.floor(0.07 * Math.sqrt(skillInfo.experience)) < skill.skillLevelRequired}
+					{#if Math.floor(0.07 * Math.sqrt(skillInfo.experience)) + 1 < skill.skillLevelRequired}
 						<button
 							type="button"
 							class="bg-red-700 text-white px-6 py-2 rounded font-medium mx-3 transition duration-200 each-in-out"
 							>Level required: {skill.skillLevelRequired}
 						</button>
-					{:else if requiredItemAmount < skill.neededItemAmount}
+					{:else if (items.find((x) => x.itemName === skill.neededItem)?.amount || 0) < skill.neededItemAmount}
 						<button
 							type="button"
 							class="bg-red-700 text-white px-6 py-2 rounded font-medium mx-3 transition duration-200 each-in-out"

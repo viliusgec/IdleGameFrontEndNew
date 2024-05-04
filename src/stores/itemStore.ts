@@ -71,11 +71,12 @@ export const loadPlayerItemData = async (jwt: string) => {
             }
         });
         if (response.ok) {
+            console.log("items loaded")
             playerItemData.set(await response.json() as PlayerItem[])
         }
     }
     catch (e) {
-        // console.log(e)
+        console.log(e)
     }
 }
 
