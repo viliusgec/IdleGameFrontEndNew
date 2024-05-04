@@ -4,7 +4,7 @@
 
 	// export let playerItems: PlayerItem[];
 	// export let token: string;
-    let filter = "head"
+    let filter = "tool"
     export let token: string;
 
 </script>
@@ -49,7 +49,7 @@
 									</div>
 								</div>
 								<div>
-									<div class="font-bold">{playerItem.description}</div>
+									<div class="font-bold capitalize">{playerItem.description}</div>
 								</div>
 							</div>
 						</td>
@@ -97,7 +97,7 @@
 										</div>
 									</div>
 									<div>
-										<div class="font-bold">{playerItem.item.name}</div>
+										<div class="font-bold capitalize">{playerItem.item.name}</div>
 									</div>
 								</div>
 							</td>

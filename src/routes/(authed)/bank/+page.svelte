@@ -3,7 +3,7 @@
     import SellItem from '$lib/components/bank/SellItem.svelte'
 	export let data;
 </script>
-
+<h1 class="font-bold text-5xl text-primary text-center mb-1">Bank</h1>
 <div
 	role="list"
 	aria-label="Behind the scenes People "

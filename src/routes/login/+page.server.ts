@@ -5,7 +5,7 @@ import * as userApi from '../../stores/userStore'
 export async function load({ cookies, parent }) {
 	await parent();
 	if (cookies.get('jwt')) {
-		throw redirect(307, `/profile`);
+		throw redirect(307, `/bank`);
 	}
 }
 
@@ -27,6 +27,6 @@ export const actions = {
 		}
 
 		cookies.set('jwt', body.token, { path: '/' });
-		throw redirect(307, '/profile');
+		throw redirect(307, '/bank');
 	}
 };

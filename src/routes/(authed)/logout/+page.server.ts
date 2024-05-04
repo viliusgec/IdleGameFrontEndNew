@@ -4,6 +4,6 @@ import { fail, redirect } from '@sveltejs/kit';
 export const actions = {
 	default: async ({ cookies }) => {
         cookies.delete('jwt')
-        throw redirect(307, '/register');
+        throw redirect(307, '/login');
 	}
 };
