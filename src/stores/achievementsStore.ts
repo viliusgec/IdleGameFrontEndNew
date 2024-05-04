@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 import { loadPlayerSkillData } from './skillStore';
+import { toast } from '@zerodevx/svelte-toast';
 
 const skillsUrl = 'https://localhost:7248/api/Skills'
 
@@ -54,6 +55,7 @@ export const claimAchievement = async (jwt: string, id: number) => {
         if (response.ok) {
             loadAchievementsData(jwt);
             loadPlayerSkillData(jwt);
+            toast.push('Achievement claimed!')
         }
     }
     catch (error) {

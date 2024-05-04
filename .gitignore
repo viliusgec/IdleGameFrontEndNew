@@ -2,6 +2,7 @@
 node_modules
 dist
 test-results/
+.VSCodeCounter/
 yarn.lock
 vite.config.js.timestamp-*
 /packages/create-svelte/template/CHANGELOG.md

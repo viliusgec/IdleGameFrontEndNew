@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { Battle, battleData, attack, resetBattle } from '../../../stores/battleStore';
+	import {
+		Battle,
+		battleData,
+		attack,
+		resetBattle,
+		selectedMonster
+	} from '../../../stores/battleStore';
 
 	export let token: string;
 	let battle: Battle;
@@ -24,7 +30,7 @@
 						<h2 class="card-title">You won!</h2>
 					{/if}
 					{#if battle.itemGiven}
-						<p>You have received an item!</p>
+						<p>You have received <b>{$selectedMonster.droppedItem}</b>!</p>
 					{:else}
 						<p>No items received</p>
 					{/if}

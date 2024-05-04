@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { toast } from '@zerodevx/svelte-toast';
 
 const battleUrl = 'https://localhost:7248/api/Battles'
 
@@ -44,6 +45,11 @@ export class Battle {
 
 export let battleData = writable(new Battle(0, '', '', 0, 0, false, false))
 export let monsterData = writable<Monster[]>([])
+export let selectedMonster = writable<Monster>(new Monster('', 0, 0, 0, 0, '', 0, 0))
+let existingBattle: Battle;
+battleData.subscribe(value => {
+    existingBattle = value;
+})
 
 export const loadMonstersData = async (jwt: string) => {
     try {
@@ -80,6 +86,7 @@ export const startBattle = async (monster: string, jwt: string) => {
     else if (response.ok) {
         console.log("Battle started")
         battleData.set(await response.json() as Battle)
+        toast.push("You have started a battle with " + monster)
     }
 }
 
@@ -100,6 +107,14 @@ export const attack = async (battle: Battle, jwt: string) => {
     }
     else if (response.ok) {
         battleData.set(await response.json() as Battle)
+        if (existingBattle.monsterHP <= 0) {
+            toast.push("You have defeated the monster")
+        } else if (existingBattle.playerHP <= 0) {
+            toast.push("You have been defeated by the monster")
+        } else {
+            toast.push("You did " + (battle.monsterHP - existingBattle.monsterHP) + " damage to the monster")
+            toast.push("You received " + (battle.playerHP - existingBattle.playerHP) + " damage from the monster")
+        }
     }
 }
 

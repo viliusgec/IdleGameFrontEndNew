@@ -6,6 +6,7 @@
 	export let data;
 	let player: Player;
 	let playerSkills: Skill[];
+	let action = 'home';
 
 	playerData.subscribe((value) => {
 		player = value;
@@ -29,11 +30,31 @@
 		</div>
 		<div class="flex-none">
 			<ul class="menu menu-horizontal px-1">
-				<li><a href="/profile">{player.username}</a></li>
-				<li><a href="/bank">Bank</a></li>
-				<li><a href="/market">Market</a></li>
-				<li><a href="/shop">Shop</a></li>
-				
+				<li>
+					<a
+						class:btn-active={action === 'profile'}
+						on:click={() => (action = 'profile')}
+						href="/profile">{player.username}</a
+					>
+				</li>
+				<li>
+					<a class:btn-active={action === 'bank'} on:click={() => (action = 'bank')} href="/bank"
+						>Bank</a
+					>
+				</li>
+				<li>
+					<a
+						class:btn-active={action === 'market'}
+						on:click={() => (action = 'market')}
+						href="/market">Market</a
+					>
+				</li>
+				<li>
+					<a class:btn-active={action === 'shop'} on:click={() => (action = 'shop')} href="/shop"
+						>Shop</a
+					>
+				</li>
+
 				<li>
 					<form method="POST" action="/logout">
 						<button>Log Out</button>
@@ -52,11 +73,15 @@
 	<div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
 		<ul class="menu bg-base-100 w-56 p-2 rounded-box">
 			<li>
-				<a href="/bank">Money: {$playerData.money}</a>
+				<a on:click={() => (action = 'bank')} href="/bank">Money: {$playerData.money}</a>
 			</li>
 			{#each playerSkills as skill}
 				<li>
-					<a href="/{skill.name.toLowerCase()}">
+					<a
+						class:btn-active={action === skill.name.toLowerCase()}
+						on:click={() => (action = skill.name.toLowerCase())}
+						href="/{skill.name.toLowerCase()}"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							class="h-5 w-5"
@@ -70,32 +95,50 @@
 								d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
 							/></svg
 						>
-						{skill.name}: {(Math.floor(0.07 * Math.sqrt(skill.experience))) + 1}
+						{skill.name}: {Math.floor(0.07 * Math.sqrt(skill.experience)) + 1}
 					</a>
 				</li>
 			{/each}
 			<li>
-				<a href="/idleTraining">Idle trainings</a>
+				<a
+					class:btn-active={action === 'idleTraining'}
+					on:click={() => (action = 'idleTraining')}
+					href="/idleTraining">Idle trainings</a
+				>
 			</li>
 			<li>
-				<a href="/combat">Combat</a>
+				<a
+					class:btn-active={action === 'combat'}
+					on:click={() => (action = 'combat')}
+					href="/combat">Combat</a
+				>
 			</li>
 			<li>
-				<a href="/socket">PvP</a>
+				<a
+					class:btn-active={action === 'socket'}
+					on:click={() => (action = 'socket')}
+					href="/socket">PvP</a
+				>
 			</li>
 			<li>
-				<a href="/leaderboards">Leaderboards</a>
+				<a
+					class:btn-active={action === 'leaderboards'}
+					on:click={() => (action = 'leaderboards')}
+					href="/leaderboards">Leaderboards</a
+				>
 			</li>
 			<li>
-				<a href="/achievements">Achievements</a>
+				<a
+					class:btn-active={action === 'achievements'}
+					on:click={() => (action = 'achievements')}
+					href="/achievements">Achievements</a
+				>
 			</li>
-
-
 		</ul>
 	</div>
 </aside>
 
 <div class="p-4 mt-16 sm:ml-64">
-	<SvelteToast/>
+	<SvelteToast />
 	<slot />
 </div>

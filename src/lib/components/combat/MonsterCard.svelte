@@ -1,9 +1,6 @@
 <script lang="ts">
-	import {
-		Monster,
-		startBattle
-	} from '../../../stores/battleStore';
-    
+	import { Monster, startBattle, selectedMonster } from '../../../stores/battleStore';
+
 	export let token: string;
 	export let monster: Monster;
 </script>
@@ -26,33 +23,36 @@
 			<h1 class="font-bold text-3xl text-primary text-center mb-1">{monster.name}</h1>
 			<div class="stats stats-vertical lg:stats-horizontal bg-transparent object-fill">
 				<div class="grid grid-cols-4 gap-4">
-				<div class="stat">
-				  <div class="stat-title">Level</div>
-				  <div class="stat-value">{monster.level}</div>
-				  <div class="stat-desc">Level</div>
+					<div class="stat">
+						<div class="stat-title">Level</div>
+						<div class="stat-value">{monster.level}</div>
+						<div class="stat-desc">Level</div>
+					</div>
+
+					<div class="stat">
+						<div class="stat-title">HP</div>
+						<div class="stat-value">{monster.hp}</div>
+						<div class="stat-desc">HP</div>
+					</div>
+					<div class="stat">
+						<div class="stat-title">Attack</div>
+						<div class="stat-value">{monster.attack}</div>
+						<div class="stat-desc">Attack</div>
+					</div>
+
+					<div class="stat">
+						<div class="stat-title">Defense</div>
+						<div class="stat-value">{monster.defense}</div>
+						<div class="stat-desc">Defense</div>
+					</div>
 				</div>
-				
-				<div class="stat">
-				  <div class="stat-title">HP</div>
-				  <div class="stat-value">{monster.hp}</div>
-				  <div class="stat-desc">HP</div>
-				</div>
-				<div class="stat">
-				  <div class="stat-title">Attack</div>
-				  <div class="stat-value">{monster.attack}</div>
-				  <div class="stat-desc">Attack</div>
-				</div>
-				
-				<div class="stat">
-					<div class="stat-title">Defense</div>
-					<div class="stat-value">{monster.defense}</div>
-					<div class="stat-desc">Defense</div>
-				  </div>
-				</div>
-			  </div>
+			</div>
 			<form method="POST" action="/combat">
 				<button
-                on:click={() => startBattle(monster.name, token)}
+					on:click={() => {
+						startBattle(monster.name, token);
+						selectedMonster.set(monster);
+					}}
 					type="button"
 					class="ml-8 w-5/6 mb-4 uppercase bg-gray-700 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-800 transition duration-200 each-in-out"
 					>Fight</button

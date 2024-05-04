@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Skill, playerSkillData } from '../../stores/skillStore';
-	import TestButton from './button/HandleButton.svelte';
+	import Button from './button/HandleButton.svelte';
 	import { playerItemData } from '../../stores/itemStore';
 	export let skill: any;
 	export let token: string;
@@ -32,14 +32,14 @@
 				{skill.trainingName}
 			</h1>
 			<div class="stat place-items-center">
-				<div class="stat-value ">{skill.xpGiven} XP</div>
-				<div class="stat-desc">Reward</div>
+				<div class="stat-value text-3xl">{skill.xpGiven} XP</div>
+				<div class="stat-title">Reward</div>
 			</div>
 
 			{#if skill.neededItem}
 				<div class="stat place-items-center">
 					<div
-						class="stat-value {requiredItemAmount < skill.neededItemAmount
+						class="stat-value text-3xl {requiredItemAmount < skill.neededItemAmount
 							? 'text-red-600'
 							: 'text-green-600'}"
 					>
@@ -70,7 +70,7 @@
 							>Item missing</button
 						>
 					{:else}
-						<TestButton {skill} {token} />
+						<Button {skill} {token} />
 					{/if}
 				</div>
 			</div>

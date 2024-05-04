@@ -2,6 +2,8 @@
 	import * as signalR from '@microsoft/signalr';
 	import { loadPlayerData, playerData } from '../../../stores/playerStore';
 	import { head_selector } from 'svelte/internal';
+	import Button from '$lib/components/button/HandlePvPButton.svelte';
+	import { toast } from '@zerodevx/svelte-toast';
 
 	let gameStarted = false;
 	let creatingGame = false;
@@ -38,6 +40,7 @@
 		healUsed = false;
 	});
 	connection.on('attackReceived', (hp: number) => {
+		toast.push('Enemy attacked for ' + (myHP - hp) + ' damage');
 		myHP = hp;
 		if (myHP <= 0) {
 			loadPlayerData(data.token);
@@ -46,6 +49,7 @@
 	});
 
 	connection.on('attackCompleted', (hp: number) => {
+		toast.push('Attacked for ' + (enemyHP - hp) + ' damage');
 		enemyHP = hp;
 		if (enemyHP <= 0) {
 			loadPlayerData(data.token);
@@ -55,6 +59,7 @@
 
 	connection.on('playerJoined', (username: string) => {
 		enemyName = username;
+		toast.push('Player Joined')
 	});
 
 	connection.on('lobbyCreated', (newLobbyId: string) => {
@@ -74,6 +79,7 @@
 
 	connection.on('enemyHealed', (hp: number) => {
 		enemyHP = hp;
+		toast.push('Enemy healed')
 	});
 
 	connection.on('healingCompleted', (hp: number) => {
@@ -104,6 +110,7 @@
 		enemyName = playerName;
 		moneyBet = lobbiesWithMoneyList[playerName].money;
 		connection.send('joinLobby', data.player?.username, lobbyID);
+		toast.push('Invitation sent')
 	}
 
 	export function startGame() {
@@ -152,7 +159,7 @@
 							</div>
 						</div>
 						<div class="px-6 mt-16">
-							<h1 class="font-bold text-3xl text-center mb-1">{data.player?.username}</h1>
+							<h1 class="font-bold text-3xl text-center text-primary mb-1">{data.player?.username}</h1>
 							<p class="text-gray-800 text-sm text-center">HP: {myHP}</p>
 							<button
 								on:click={() => heal()}
@@ -176,10 +183,11 @@
 							</div>
 						</div>
 						<div class="px-6 mt-16">
-							<h1 class="font-bold text-3xl text-center mb-1">{enemyName}</h1>
+							<h1 class="font-bold text-3xl text-center text-primary mb-1">{enemyName}</h1>
 							<p class="text-gray-800 text-sm text-center">HP: {enemyHP}</p>
+							<!-- <Button on:click={attack}></Button> -->
 							<button
-								on:click={() => attack()}
+								on:click={attack}
 								type="button"
 								class="w-full uppercase bg-gray-700 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-800 transition duration-200 each-in-out"
 								>Attack</button
@@ -190,14 +198,20 @@
 			</div>
 		</div>
 	{:else if creatingGame}
-	<div class="px-6 mt-16 grid justify-items-center">
+		<div class="px-6 mt-16 grid justify-items-center">
 			<p class="text-black text-center">Enter amount you want to bet and create the lobby</p>
 			<section>
 				<div>
-					<input class="input input-bordered input-primary w-full max-w-xs" type="number" bind:value={moneyBet} min="0" max={$playerData.money} />
+					<input
+						class="input input-bordered input-primary w-full max-w-xs"
+						type="number"
+						bind:value={moneyBet}
+						min="0"
+						max={$playerData.money}
+					/>
 				</div>
 			</section>
-<br />
+			<br />
 			<button
 				on:click={() => createLobby2()}
 				disabled={moneyBet > ($playerData.money ?? 0)}
@@ -205,7 +219,7 @@
 				class="uppercase bg-gray-700 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-800 transition duration-200 each-in-out"
 				>Create lobby</button
 			>
-<br />
+			<br />
 			<button
 				on:click={() => joinLobby()}
 				type="button"
@@ -214,7 +228,7 @@
 			>
 		</div>
 	{:else if joiningGame && lobbiesList !== undefined && lobbiesWithMoneyList !== undefined}
-		<div class="px-6 mt-16 grid justify-items-center">
+		<div class="px-6 grid justify-items-center">
 			<h1 class="font-bold text-3xl text-center pb-8 mb-1 text-primary uppercase">Lobbies</h1>
 			<table class="table w-1/2">
 				<thead>
@@ -229,7 +243,7 @@
 						{#if key !== data.player?.username && value.money <= ($playerData.money ?? 0)}
 							<tr>
 								<td> {key} </td>
-								<td> {value.money} {$playerData.money} </td>
+								<td> {value.money} </td>
 								<th>
 									<button
 										class="btn btn-ghost btn-xs"
@@ -250,25 +264,31 @@
 			</table>
 		</div>
 	{:else if waitingForOpponent}
-		<p class="text-black text-center">Your lobby ID: {lobbyId}. </p>
-		<p>Money bet: {moneyBet}</p>
-		{#if enemyName === ''}
-			<p class="text-black text-center">Waiting for opponent...</p>
-			<button
-				on:click={() => joinLobby()}
-				type="button"
-				class="uppercase bg-gray-700 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-800 transition duration-200 each-in-out"
-				>Join existing lobby</button
-			>
-		{:else}
-			<p class="text-black text-center">{enemyName} joined your lobby. Start game</p>
-			<button
-				on:click={() => startGame()}
-				type="button"
-				class="uppercase bg-gray-700 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-800 transition duration-200 each-in-out"
-				>Start</button
-			>
-		{/if}
+		<div class="px-6 mt-16 grid justify-items-center">
+			<div class="card w-96 bg-white text-gray-800">
+				<div class="card-body">
+					<p class=" text-center">Your lobby ID: {lobbyId}.</p>
+					<p class=" text-center">Money bet: {moneyBet}</p>
+					{#if enemyName === ''}
+						<p class="text-center">Waiting for opponent...</p>
+						<button
+							on:click={() => joinLobby()}
+							type="button"
+							class="uppercase bg-gray-700 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-800 transition duration-200 each-in-out"
+							>Join existing lobby</button
+						>
+					{:else}
+						<p class="text-black text-center"><b>{enemyName} joined your lobby. Start game</b></p>
+						<button
+							on:click={() => startGame()}
+							type="button"
+							class="uppercase bg-gray-700 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-800 transition duration-200 each-in-out"
+							>Start</button
+						>
+					{/if}
+				</div>
+			</div>
+		</div>
 	{:else}
 		<div class="px-6 mt-16 grid justify-items-center">
 			<h2 class="text-primary text-center uppercase font-bold pb-8">Create or join a game</h2>
