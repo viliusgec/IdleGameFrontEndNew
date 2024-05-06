@@ -24,7 +24,7 @@
 		<div class="absolute -mt-20 w-full flex justify-center">
 			<div class="h-32 w-32">
 				<img
-					src="src\lib\images\{skillName}\{skill.trainingName}.svg"
+					src="src\lib\images\trainings\{skill.trainingName}.svg"
 					alt="Skill training"
 					class="rounded-full object-cover h-full w-full shadow-md"
 				/>

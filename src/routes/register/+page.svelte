@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Sign up • Conduit</title>
+	<title>Idle Game</title>
 </svelte:head>
 
 <section class="h-full">

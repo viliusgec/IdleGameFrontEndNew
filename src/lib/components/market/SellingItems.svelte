@@ -30,7 +30,7 @@
 									</div>
 								</div>
 								<div>
-									<div class="font-bold">{playerItem.itemName}</div>
+									<div class="font-bold capitalize">{playerItem.itemName}</div>
 								</div>
 							</div>
 						</td>
