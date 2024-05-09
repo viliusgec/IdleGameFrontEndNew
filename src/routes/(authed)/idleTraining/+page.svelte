@@ -61,6 +61,15 @@
 								<tr>
 									<td>
 										<div class="flex items-center space-x-3">
+											<div class="avatar">
+												<div class="mask mask-squircle w-12 h-12">
+													<img
+														src="src\lib\images\trainings\{$activeIdleTrainingData.idleTraining
+															.name}.svg"
+														alt="Skill training"
+													/>
+												</div>
+											</div>
 											<div>
 												<div class="font-bold">{$activeIdleTrainingData.idleTraining.name}</div>
 											</div>

@@ -48,7 +48,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				{#each $shopItems as item}
+				{#each filteredMarketItems as item, i}
+				{#if i < page * pageSize && i >= pageSize * page - pageSize}
 					<tr>
 						<td>
 							<div class="flex items-center space-x-3">
@@ -72,6 +73,7 @@
 							>
 						</th>
 					</tr>
+				{/if}
 				{/each}
 				<!-- PAgination -->
 				<div class="join grid grid-cols-2">

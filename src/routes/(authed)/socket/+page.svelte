@@ -166,7 +166,7 @@
 								disabled={healUsed}
 								type="button"
 								class="w-full uppercase bg-gray-700 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-800 transition duration-200 each-in-out"
-								>Heal</button
+								>{!healUsed ? "Heal (x1)" : "Heal used"}</button
 							>
 						</div>
 					</div>
@@ -259,7 +259,7 @@
 					on:click={() => createLobby()}
 					type="button"
 					class="w-1/2 uppercase bg-gray-700 text-white py-2 rounded font-medium hover:bg-gray-800 transition duration-200 each-in-out"
-					>Create new lobby</button
+					>Return</button
 				>
 			</table>
 		</div>

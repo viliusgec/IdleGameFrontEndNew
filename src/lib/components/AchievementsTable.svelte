@@ -10,7 +10,7 @@
 				<tr>
 					<th>Description</th>
 					<th>Progress</th>
-					<th>Reward</th>
+					<th>Reward (XP)</th>
 					<th />
 				</tr>
 			</thead>
