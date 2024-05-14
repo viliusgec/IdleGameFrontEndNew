@@ -1,9 +1,6 @@
 <script lang="ts">
-	import { PlayerIdleTraining } from '../../../stores/idleTrainingStore';
 	import { playerItemData, equipedItemsData, EquipItem, UnequipItem, Item } from '../../../stores/itemStore';
 
-	// export let playerItems: PlayerItem[];
-	// export let token: string;
     let filter = "tool"
     export let token: string;
 
@@ -77,6 +74,9 @@
 			<thead>
 				<tr>
 					<th>Name</th>
+					<th>HP</th>
+					<th>Attack</th>
+					<th>Defense</th>
 					<th>Item Place</th>
 					<th>Unequip</th>
 				</tr>
@@ -101,6 +101,9 @@
 									</div>
 								</div>
 							</td>
+							<td>{playerItem.item.hp ?? 0}</td>
+							<td>{playerItem.item.attack ?? 0}</td>
+							<td>{playerItem.item.defense ?? 0}</td>
 							<td>
 								<div class="flex items-center space-x-3">
 									<div>

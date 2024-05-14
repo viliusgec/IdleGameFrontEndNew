@@ -35,7 +35,7 @@ export const loadMarketItemData = async (jwt: string) => {
         }
     }
     catch (e) {
-        // console.log(e)
+        console.log(e)
     }
 }
 
@@ -53,7 +53,7 @@ export const loadPlayerMarketItemData = async (jwt: string) => {
         }
     }
     catch (e) {
-        // console.log(e)
+        console.log(e)
     }
 }
 
@@ -71,7 +71,6 @@ export const sellItem = async (item: MarketItem, jwt: string) => {
         console.log("Can not sell")
     }
     if (response.ok) {
-        //Redirect to market page
         loadMarketItemData(jwt);
         loadPlayerMarketItemData(jwt);
         loadPlayerItemData(jwt);

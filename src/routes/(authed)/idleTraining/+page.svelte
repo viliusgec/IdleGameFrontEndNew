@@ -1,8 +1,6 @@
 <script lang="ts">
 	import {
-		PlayerIdleTraining,
 		IdleTraining,
-		idleTrainingData,
 		idleTrainingListData,
 		StartIdleTraining,
 		StopIdleTraining,
@@ -47,7 +45,6 @@
 						</svg>
 					</span>
 					<table class="table w-full">
-						<!-- Veliau kazka normalaus sumastyt, kaip laika rodyt, cancel ir pns -->
 						{#if $activeIdleTrainingData.active}
 							<thead>
 								<tr>

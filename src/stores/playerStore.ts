@@ -41,5 +41,3 @@ export const loadPlayerData = async (jwt: string) => {
         console.log(e)
     }
 }
-
-// loadPlayerData(jwt);

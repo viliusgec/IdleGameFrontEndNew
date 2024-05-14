@@ -1,16 +1,12 @@
 <script lang="ts">
 	import * as signalR from '@microsoft/signalr';
 	import { loadPlayerData, playerData } from '../../../stores/playerStore';
-	import { head_selector } from 'svelte/internal';
-	import Button from '$lib/components/button/HandlePvPButton.svelte';
 	import { toast } from '@zerodevx/svelte-toast';
 
 	let gameStarted = false;
 	let creatingGame = false;
 	let waitingForOpponent = false;
 	let joiningGame = false;
-	// 0 - creating lobby 1 - waiting for opponent, 2 - joining game, 3 - game started, 4 - game ended, 5 - game won, 6 - game lost,
-	let gameState = '';
 	let enemyName = '';
 	let healUsed = false;
 	let moneyBet = 0;
@@ -89,7 +85,6 @@
 	export function createLobby() {
 		joiningGame = false;
 		creatingGame = true;
-		// connection.send('createLobby', data.player?.username);
 	}
 
 	export function createLobby2() {
@@ -106,7 +101,6 @@
 	}
 
 	export function joinExistingLobby(lobbyID: string, playerName: string) {
-		// Send message that invintation has been send
 		enemyName = playerName;
 		moneyBet = lobbiesWithMoneyList[playerName].money;
 		connection.send('joinLobby', data.player?.username, lobbyID);
@@ -185,7 +179,6 @@
 						<div class="px-6 mt-16">
 							<h1 class="font-bold text-3xl text-center text-primary mb-1">{enemyName}</h1>
 							<p class="text-gray-800 text-sm text-center">HP: {enemyHP}</p>
-							<!-- <Button on:click={attack}></Button> -->
 							<button
 								on:click={attack}
 								type="button"

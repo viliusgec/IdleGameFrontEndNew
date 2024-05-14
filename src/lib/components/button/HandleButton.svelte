@@ -13,7 +13,6 @@
 	async function handleButton() {
 	  if (!isLoading && !isError && !($activeSkill !== skill && $activeSkill.name !== '')) {
 	    // set loading state
-		// await trainSkill(skill, token)
 		activeSkill.set(skill);
 	    isLoading = true;
 	    // reset loading state

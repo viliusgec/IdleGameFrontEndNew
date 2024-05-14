@@ -3,7 +3,7 @@
 	import { getLeaderboardBySkill } from '../../../stores/leaderboardStore';
 
 	let activeSkill = 'Woodcutting';
-	getLeaderboardBySkill(activeSkill); //Neveik be to cia
+	getLeaderboardBySkill(activeSkill);
 </script>
 
 <div class="flex flex-col w-full lg:flex-row justify-center">

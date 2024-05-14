@@ -21,7 +21,6 @@ export let userData = writable(new User('',''))
 
 export async function login(user: User){
     if(user.password !== '' && user.username !== ''){
-        //fix this tls shit later
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
         const response = await fetch(`${userUrl}/Login`, {
             method: 'POST',
@@ -31,9 +30,7 @@ export async function login(user: User){
             body: JSON.stringify(user)
         });
         if (response.status === 400) {
-            // notifications.default('default', 1000)
-            // toast.push('Hello world!')
-            console.log("bad pass")
+            console.log("bad password/username?")
         }   
         if (response.ok) {
             return await response.json()

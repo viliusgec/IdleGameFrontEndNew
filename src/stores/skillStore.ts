@@ -59,5 +59,3 @@ export const trainSkill = async (trainingSkill:TrainingSkill, jwt: string) => {
         loadPlayerItemData(jwt);
     }
 }
-
-// loadPlayerSkillData();

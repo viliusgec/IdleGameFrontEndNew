@@ -94,7 +94,7 @@ export const loadShopItemsData = async (jwt: string) => {
         }
     }
     catch (e) {
-        // console.log(e)
+        console.log(e)
     }
 }
 
@@ -136,7 +136,6 @@ export const buyItem = async (item:PlayerItem, amount: number, jwt: string) => {
     }
 }
 
-// Do we need the above method?
 export const buyShopItem = async (item:Item, amount: number, jwt: string) => {
     const response = await fetch(`${itemsUrl}/BuyItems?itemName=${item.name}&buyAmount=${amount}`, {
         method: 'POST',
@@ -202,7 +201,6 @@ export const loadEquipedItemsData = async (jwt: string) => {
         }
     }
     catch (e) {
-        // console.log(e)
+        console.log(e)
     }
 }
-// loadPlayerItemData();

@@ -86,7 +86,7 @@
 						</tr>
 					{/if}
 				{/each}
-				<!-- PAgination -->
+				<!-- Pagination -->
 				<div class="join grid grid-cols-2">
 					{#if page > 1 }
 					<button on:click={() => page--} class="join-item btn btn-outline"
