@@ -1,18 +1,12 @@
 <script lang="ts">
-	import { shopItems, loadShopItemsData, Item, buyShopItem } from '../../../stores/itemStore';
+	import { loadAllItemsData, allItemsData, addShopItem } from '../../../stores/itemStore';
 
 	export let token: string;
-	let selectedItem = {} as Item;
-	let filteredMarketItems = $shopItems;
-	let amount = 0;
+	let filteredMarketItems = $allItemsData;
 	let filter = '';
 	let page = 1;
 	let pageSize = 5;
-	loadShopItemsData(token);
-	export function cancel() {
-		selectedItem = {} as Item;
-		amount = 0;
-	}
+	loadAllItemsData(token);
 </script>
 
 <div class="flex flex-col w-full lg:flex-row">
@@ -24,7 +18,7 @@
 				placeholder="Filter"
 				bind:value={filter}
 				on:input={() => {
-					filteredMarketItems = $shopItems.filter((x) => x.description.includes(filter));
+					filteredMarketItems = $allItemsData.filter((x) => x.description.includes(filter));
 				}}
 			/>
 			<svg
@@ -44,7 +38,7 @@
 				<tr>
 					<th>Name</th>
 					<th>Price</th>
-					<th>Buy item</th>
+					<th>Add to shop</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -68,8 +62,8 @@
 							<button
 								class="btn btn-ghost btn-xs"
 								on:click={() => {
-									selectedItem = item;
-								}}>Buy</button
+                                    addShopItem(item, token);
+								}}>Add</button
 							>
 						</th>
 					</tr>
@@ -87,25 +81,4 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="divider lg:divider-horizontal" />
-	{#if selectedItem.name}
-		<div class="grid flex-grow card bg-base-300 rounded-box place-items-center">
-			<div class="text-center text-white-600 text-base pt-3 font-normal">
-				<p>
-					<b>Selected Item: {selectedItem.name}</b>
-				</p>
-				<br />
-				<p>How much you want to buy?</p>
-				<br />
-				<input bind:value={amount} type="number" class="input input-bordered w-full max-w-xs" />
-				<br />
-				<br />
-				<button
-					on:click={() => buyShopItem(selectedItem, amount, token).then(() => cancel())}
-					class="btn">Buy Item</button
-				>
-				<button on:click={() => cancel()} class="btn">Cancel</button>
-			</div>
-		</div>
-	{/if}
 </div>

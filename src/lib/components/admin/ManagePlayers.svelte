@@ -1,16 +1,18 @@
 <script lang="ts">
-	import { shopItems, loadShopItemsData, Item, buyShopItem } from '../../../stores/itemStore';
+	// ------------------
+	import { Player, updatePlayerMoney } from '../../../stores/playerStore';
 
+	export let players: Player[];
 	export let token: string;
-	let selectedItem = {} as Item;
-	let filteredMarketItems = $shopItems;
+
+	let selecterPlayer = {} as Player;
+	let filteredPlayers = players;
 	let amount = 0;
 	let filter = '';
 	let page = 1;
 	let pageSize = 5;
-	loadShopItemsData(token);
 	export function cancel() {
-		selectedItem = {} as Item;
+		selecterPlayer = {} as Player;
 		amount = 0;
 	}
 </script>
@@ -24,7 +26,7 @@
 				placeholder="Filter"
 				bind:value={filter}
 				on:input={() => {
-					filteredMarketItems = $shopItems.filter((x) => x.description.includes(filter));
+					filteredPlayers = players.filter((x) => x.username.includes(filter));
 				}}
 			/>
 			<svg
@@ -42,45 +44,34 @@
 		<table class="table w-full">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Price</th>
-					<th>Buy item</th>
+					<th>Username</th>
+					<th>Money</th>
+					<th>Edit money</th>
 				</tr>
 			</thead>
 			<tbody>
-				{#each filteredMarketItems as item, i}
-				{#if i < page * pageSize && i >= pageSize * page - pageSize}
-					<tr>
-						<td>
-							<div class="flex items-center space-x-3">
-								<div class="avatar">
-									<div class="mask mask-squircle w-12 h-12">
-										<img src="src\lib\images\Items\{item.name}.svg" alt="Skill training" />
-									</div>
-								</div>
-								<div>
-									<div class="font-bold">{item.description}</div>
-								</div>
-							</div>
-						</td>
-						<td> {item.sellPrice} </td>
-						<th>
-							<button
-								class="btn btn-ghost btn-xs"
-								on:click={() => {
-									selectedItem = item;
-								}}>Buy</button
-							>
-						</th>
-					</tr>
-				{/if}
+				{#each filteredPlayers as playerItem, i}
+					{#if i < page * pageSize && i >= pageSize * page - pageSize}
+						<tr>
+							<td> {playerItem.username} </td>
+							<td> {playerItem.money} </td>
+							<th>
+								<button
+									class="btn btn-ghost btn-xs"
+									on:click={() => {
+										selecterPlayer = playerItem;
+									}}>Edit</button
+								>
+							</th>
+						</tr>
+					{/if}
 				{/each}
 				<!-- PAgination -->
 				<div class="join grid grid-cols-2">
 					{#if page > 1}
 						<button on:click={() => page--} class="join-item btn btn-outline">Previous page</button>
 					{/if}
-					{#if filteredMarketItems.length > pageSize * page}
+					{#if filteredPlayers.length > pageSize * page}
 						<button on:click={() => page++} class="join-item btn btn-outline">Next page</button>
 					{/if}
 				</div>
@@ -88,22 +79,23 @@
 		</table>
 	</div>
 	<div class="divider lg:divider-horizontal" />
-	{#if selectedItem.name}
+	{#if selecterPlayer.username}
 		<div class="grid flex-grow card bg-base-300 rounded-box place-items-center">
-			<div class="text-center text-white-600 text-base pt-3 font-normal">
+			<div class="text-center text-gray-600 text-base pt-3 font-normal">
 				<p>
-					<b>Selected Item: {selectedItem.name}</b>
+					Selected Player: {selecterPlayer.username}
 				</p>
 				<br />
-				<p>How much you want to buy?</p>
+				<p>Change money to:</p>
 				<br />
-				<input bind:value={amount} type="number" class="input input-bordered w-full max-w-xs" />
+				<input
+					bind:value={selecterPlayer.money}
+					type="number"
+					class="input input-bordered w-full max-w-xs"
+				/>
 				<br />
 				<br />
-				<button
-					on:click={() => buyShopItem(selectedItem, amount, token).then(() => cancel())}
-					class="btn">Buy Item</button
-				>
+				<button on:click={() => updatePlayerMoney(selecterPlayer, token)} class="btn">Sell Item</button>
 				<button on:click={() => cancel()} class="btn">Cancel</button>
 			</div>
 		</div>

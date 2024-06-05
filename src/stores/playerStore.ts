@@ -18,6 +18,7 @@ export class Player {
 }
 
 export let playerData = writable(new Player('', 0, 0, false, false))
+export let allPlayersData = writable<Player[]>([])
 
 export const loadPlayerData = async (jwt: string) => {
     try{
@@ -39,5 +40,44 @@ export const loadPlayerData = async (jwt: string) => {
     }
     catch (e) {
         console.log(e)
+    }
+}
+
+export const loadAllPlayersData = async (jwt: string) => {
+    try{
+        const response = await fetch(`${playerUrl}/GetPlayers`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': 'Bearer ' + jwt
+            }
+        });
+        if (response.ok) {
+            let data = await response.json() as Player[]
+            allPlayersData.set(data)
+            return data
+        }
+        else {
+            console.log(response)
+        }
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
+
+export const updatePlayerMoney = async (player: Player, jwt: string) => {
+    const response = await fetch(`${playerUrl}/UpdateMoney`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+        }
+    });
+    if (response.status === 404 || response.status === 400) {
+        console.log("Can not update money")
+    }
+    if (response.ok) {
+        await loadAllPlayersData(jwt)
     }
 }

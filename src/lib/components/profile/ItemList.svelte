@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { playerItemData, equipedItemsData, EquipItem, UnequipItem, Item } from '../../../stores/itemStore';
+	import { playerItemData, equipedItemsData, EquipItem, UnequipItem, itemStatus } from '../../../stores/itemStore';
 
     let filter = "tool"
     export let token: string;
-
 </script>
 
 <div class="flex flex-col w-full lg:flex-row">
@@ -32,7 +31,7 @@
 			</thead>
 			<tbody>
 				{#each $playerItemData as playerItem}
-                    {#if playerItem.type === filter}
+                    {#if playerItem.type === filter && $equipedItemsData.find((item)=>item.item.name === playerItem.itemName) === undefined}
 					<tr>
 						<td>
 							<div class="flex items-center space-x-3">
@@ -101,9 +100,9 @@
 									</div>
 								</div>
 							</td>
-							<td>{playerItem.item.hp ?? 0}</td>
-							<td>{playerItem.item.attack ?? 0}</td>
-							<td>{playerItem.item.defense ?? 0}</td>
+							<td>{$playerItemData.find((item)=>item.itemName === playerItem.item.name)?.item.hp ?? 0}</td>
+							<td>{$playerItemData.find((item)=>item.itemName === playerItem.item.name)?.item.attack ?? 0}</td>
+							<td>{$playerItemData.find((item)=>item.itemName === playerItem.item.name)?.item.defense ?? 0}</td>
 							<td>
 								<div class="flex items-center space-x-3">
 									<div>
@@ -121,6 +120,22 @@
 						</tr>
 					{/if}
 				{/each}
+				<tr>
+					<td>
+						<div class="flex items-center space-x-3">
+							<div>
+								<div class="font-bold capitalize">Final Stats</div>
+							</div>
+						</div>
+					</td>
+					<td>{$itemStatus.hp}</td>
+					<td>{$itemStatus.attack}</td>
+					<td>{$itemStatus.defense}</td>
+					<td>	 
+					</td>
+					<th>
+					</th>
+				</tr>
 			</tbody>
 		</table>
 	</div>

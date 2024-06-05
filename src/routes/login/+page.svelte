@@ -58,7 +58,6 @@
 								>Remember me</label
 							>
 						</div>
-						<a href="#!" class="text-gray-800">Forgot password?</a>
 					</div>
 
 					<div class="text-center lg:text-left">

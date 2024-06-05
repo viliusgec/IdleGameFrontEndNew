@@ -9,6 +9,7 @@ export class Item {
     description: string;
     price: number;
     isSellable: boolean
+    sellPrice?: number;
     hp?: number;
     defense?: number;
     attack?: number;
@@ -56,10 +57,39 @@ export class EquipedItem {
     }
 }
 
+export class PlayerStats {
+    hp: number;
+    attack: number;
+    defense: number;
+    constructor(hp: number, attack: number, defense: number) {
+        this.hp = hp;
+        this.attack = attack;
+        this.defense = defense;
+    }
+}
+
 export let playerItemData = writable<PlayerItem[]>([])
+export let allItemsData = writable<Item[]>([])
 export let selectedPlayerItemData = writable(new PlayerItem())
 export let equipedItemsData = writable<EquipedItem[]>([])
 export let shopItems = writable<Item[]>([])
+export let itemStatus = writable<PlayerStats>(new PlayerStats(0, 0, 0))
+
+export const calculatePlayerStats = async () => {
+    let hp = 0;
+    let attack = 0;
+    let defense = 0;
+    equipedItemsData.subscribe((items) => {
+        items.forEach(item => {
+            playerItemData.subscribe((playerItems) => {
+                hp += playerItems.find((playerItem)=>playerItem.itemName === item.item.name)?.item.hp ?? 0;
+                attack += playerItems.find((playerItem)=>playerItem.itemName === item.item.name)?.item.attack ?? 0;
+                defense += playerItems.find((playerItem)=>playerItem.itemName === item.item.name)?.item.defense ?? 0;
+            })
+        })
+    })
+    itemStatus.set(new PlayerStats(hp, attack, defense))
+}
 
 export const loadPlayerItemData = async (jwt: string) => {
     try {
@@ -154,6 +184,23 @@ export const buyShopItem = async (item:Item, amount: number, jwt: string) => {
     }
 }
 
+export const editShopItem = async (item:Item, jwt: string) => {
+    const response = await fetch(`${itemsUrl}/EditItemPrice`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+        },
+        body: JSON.stringify(item)
+    });
+    if (response.status === 404 || response.status === 400) {
+        console.log("Can not buy")
+    }
+    if (response.ok) {
+        await loadShopItemsData(jwt);
+    }
+}
+
 export const EquipItem = async (item: string, jwt: string) => {
     const response = await fetch(`${itemsUrl}/EquipItem?itemName=${item}`, {
         method: 'POST',
@@ -198,9 +245,45 @@ export const loadEquipedItemsData = async (jwt: string) => {
         });
         if (response.ok) {
             equipedItemsData.set(await response.json() as EquipedItem[])
+            calculatePlayerStats()
         }
     }
     catch (e) {
         console.log(e)
+    }
+}
+
+export const loadAllItemsData = async (jwt: string) => {
+    try {
+        const response = await fetch(`${itemsUrl}`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': 'Bearer ' + jwt
+            }
+        });
+        if (response.ok) {
+            allItemsData.set(await response.json() as Item[])
+        }
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
+
+export const addShopItem = async (item: Item, jwt: string) => {
+    const response = await fetch(`${itemsUrl}/AddShopItem`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+        },
+        body: JSON.stringify(item)
+    });
+    if (response.status === 404 || response.status === 400) {
+        console.log("Can not add:" + response.json)
+    }
+    if (response.ok) {
+        await loadShopItemsData(jwt)
     }
 }

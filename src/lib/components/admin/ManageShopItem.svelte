@@ -1,17 +1,15 @@
 <script lang="ts">
-	import { shopItems, loadShopItemsData, Item, buyShopItem } from '../../../stores/itemStore';
+	import { shopItems, loadShopItemsData, Item, editShopItem } from '../../../stores/itemStore';
 
 	export let token: string;
 	let selectedItem = {} as Item;
 	let filteredMarketItems = $shopItems;
-	let amount = 0;
 	let filter = '';
 	let page = 1;
 	let pageSize = 5;
 	loadShopItemsData(token);
 	export function cancel() {
 		selectedItem = {} as Item;
-		amount = 0;
 	}
 </script>
 
@@ -44,7 +42,7 @@
 				<tr>
 					<th>Name</th>
 					<th>Price</th>
-					<th>Buy item</th>
+					<th>Change Price</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -69,7 +67,7 @@
 								class="btn btn-ghost btn-xs"
 								on:click={() => {
 									selectedItem = item;
-								}}>Buy</button
+								}}>Manage</button
 							>
 						</th>
 					</tr>
@@ -95,14 +93,14 @@
 					<b>Selected Item: {selectedItem.name}</b>
 				</p>
 				<br />
-				<p>How much you want to buy?</p>
+				<p>New price</p>
 				<br />
-				<input bind:value={amount} type="number" class="input input-bordered w-full max-w-xs" />
+				<input bind:value={selectedItem.sellPrice} type="number" class="input input-bordered w-full max-w-xs" />
 				<br />
 				<br />
 				<button
-					on:click={() => buyShopItem(selectedItem, amount, token).then(() => cancel())}
-					class="btn">Buy Item</button
+					on:click={() => editShopItem(selectedItem, token).then(() => cancel())}
+					class="btn">Change</button
 				>
 				<button on:click={() => cancel()} class="btn">Cancel</button>
 			</div>

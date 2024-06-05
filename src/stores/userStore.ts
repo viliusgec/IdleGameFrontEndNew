@@ -6,9 +6,11 @@ export class User {
     username:string;
     password:string;
     email?:string;
-    constructor(uname: string, pass: string, email?: string) {
+    role: string;
+    constructor(uname: string, pass: string, role: string, email?: string) {
         this.username = uname;
         this.password = pass;
+        this.role = role;
         this.email = email;
       }
 }
@@ -17,7 +19,7 @@ export class Token {
     token!: string;
 }
 
-export let userData = writable(new User('',''))
+export let userData = writable(new User('','', 'Player'))
 
 export async function login(user: User){
     if(user.password !== '' && user.username !== ''){
@@ -42,7 +44,6 @@ export async function login(user: User){
 
 export async function register(user: User){
     if(user.password !== '' && user.username !== '' && user.email !== ''){
-        //fix this tls shit later
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
         const response = await fetch(`${userUrl}/Register`, {
             method: 'POST',
@@ -60,4 +61,24 @@ export async function register(user: User){
         return
     } 
     return
+}
+
+export async function getUserData(jwt: string) {
+    try {
+        console.log("getting user data")
+        const response = await fetch(`${userUrl}/GetUser`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': 'Bearer ' + jwt
+            }
+        });
+        if (response.ok) {
+            console.log("response ok")
+            userData.set(await response.json() as User)
+        }
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
